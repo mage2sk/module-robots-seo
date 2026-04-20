@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO — System configuration.
+ *
+ * Tab `panth` is declared by Panth_Core. Section id matches the Config
+ * helper paths (`panth_robots_seo/general/*`, `panth_robots_seo/llm_bots/*`,
+ * `panth_robots_seo/robots_txt/*`).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="panth_robots_seo" translate="label" type="text"
+                 sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Robots &amp; LLM Bots</label>
+            <tab>panth</tab>
+            <resource>Panth_RobotsSeo::config</resource>
+
+            <group id="general" translate="label" sortOrder="10"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Master switch. When disabled, X-Robots-Tag header and robots.txt overrides are skipped entirely.</comment>
+                </field>
+                <field id="debug" translate="label comment" type="select" sortOrder="15"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Debug Logging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When enabled, logs header/meta decisions to var/log/panth_robots_seo.log.</comment>
+                </field>
+                <field id="default_directive" translate="label comment" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Meta Robots</label>
+                    <comment><![CDATA[Default <code>&lt;meta name="robots"&gt;</code> value when no per-entity directive is set. Allowed tokens: index, noindex, follow, nofollow, noarchive, nosnippet, noimageindex, max-snippet, max-image-preview, max-video-preview, unavailable_after, none, all.]]></comment>
+                </field>
+                <field id="noindex_filtered" translate="label comment" type="select" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Noindex Layered-Nav Filtered Pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Emit <strong>noindex,follow</strong> when a catalog listing has layered-nav filters applied (sort/limit/attribute filters).</comment>
+                </field>
+                <field id="noindex_search_results" translate="label comment" type="select" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Noindex Search Result Pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Emit <strong>noindex,follow</strong> on <code>/catalogsearch/result/*</code> pages.</comment>
+                </field>
+                <field id="noindex_paths" translate="label comment" type="textarea" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Noindex URL Paths (one per line)</label>
+                    <comment><![CDATA[Private / customer URL path patterns that must emit <strong>noindex,nofollow</strong> on both <code>&lt;meta&gt;</code> and <code>X-Robots-Tag</code>. Wildcards supported: <code>*</code> matches anything.]]></comment>
+                </field>
+                <field id="max_image_preview" translate="label comment" type="select" sortOrder="60"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>max-image-preview Directive</label>
+                    <source_model>Panth\RobotsSeo\Model\Config\Source\MaxImagePreview</source_model>
+                    <comment>"large" is recommended for Google Discover eligibility.</comment>
+                </field>
+                <field id="max_snippet" translate="label comment" type="text" sortOrder="70"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>max-snippet Directive</label>
+                    <validate>validate-number</validate>
+                    <comment>-1 = unlimited (recommended). Positive integers limit the SERP snippet length.</comment>
+                </field>
+                <field id="crawl_delay" translate="label comment" type="text" sortOrder="80"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Crawl-delay (seconds)</label>
+                    <validate>validate-digits</validate>
+                    <comment>Emitted under <code>User-agent: *</code> in robots.txt. 0 omits the directive.</comment>
+                </field>
+            </group>
+
+            <group id="llm_bots" translate="label" sortOrder="20"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>LLM Bot Policy</label>
+                <field id="gptbot" translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow GPTBot (OpenAI)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="claudebot" translate="label" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow ClaudeBot (Anthropic)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="google_extended" translate="label" type="select" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Google-Extended</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="ccbot" translate="label" type="select" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow CCBot (Common Crawl)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="perplexitybot" translate="label" type="select" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow PerplexityBot</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="bytespider" translate="label" type="select" sortOrder="60"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Bytespider (ByteDance)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="chatgpt_user" translate="label" type="select" sortOrder="70"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow ChatGPT-User</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="oai_searchbot" translate="label" type="select" sortOrder="80"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow OAI-SearchBot</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="anthropic_ai" translate="label" type="select" sortOrder="90"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Anthropic-AI</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cohere_ai" translate="label" type="select" sortOrder="100"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Cohere-AI</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="amazonbot" translate="label" type="select" sortOrder="110"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Amazonbot</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="applebot_extended" translate="label" type="select" sortOrder="120"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Applebot-Extended</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="facebookbot" translate="label" type="select" sortOrder="130"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Facebookbot</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="meta_externalagent" translate="label" type="select" sortOrder="140"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Meta-ExternalAgent</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="robots_txt" translate="label" sortOrder="30"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>robots.txt Override</label>
+                <field id="override_enabled" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Custom robots.txt Body</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When enabled, the custom body below REPLACES the generated robots.txt. All LLM bot toggles and policy rows are ignored.</comment>
+                </field>
+                <field id="custom_body" translate="label comment" type="textarea" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom robots.txt Body</label>
+                    <comment>Pasted verbatim into the response. CRLF is normalised to LF to prevent HTTP header smuggling. Leave empty to use the generated output.</comment>
+                    <depends><field id="override_enabled">1</field></depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

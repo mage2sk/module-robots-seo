@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO — Frontend router.
+ *
+ * The frontName `seo_robots` is wired up so `/seo_robots/robots/index`
+ * reaches `Controller/Robots/Index.php`. To have `/robots.txt` map here we
+ * rely on the disablement of `Magento_Robots::robots` in
+ * `etc/frontend/di.xml` combined with a `url_rewrite` row installed via the
+ * data patch — that combination matches the approach used in
+ * Panth_AdvancedSEO and works across Hyva/Luma.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="panth_robots_seo" frontName="seo_robots">
+            <module name="Panth_RobotsSeo"/>
+        </route>
+    </router>
+</config>

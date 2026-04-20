@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO — Declarative schema.
+ *
+ * The table name `panth_seo_robots_policy` is preserved from Panth_AdvancedSEO
+ * so an existing install upgrading to this standalone module sees zero data
+ * loss. If Panth_AdvancedSEO is still installed the table already exists —
+ * Magento's declarative-schema parser resolves that as a no-op (the shapes
+ * match exactly).
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="panth_seo_robots_policy" resource="default" engine="innodb"
+           comment="Panth Robots SEO: user-agent / path / directive rows">
+        <column xsi:type="int" name="policy_id" unsigned="true" nullable="false"
+                identity="true" comment="Policy ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false"
+                default="0" comment="Store ID"/>
+        <column xsi:type="varchar" name="user_agent" length="128" nullable="false"
+                comment="User agent"/>
+        <column xsi:type="varchar" name="directive" length="16" nullable="false"
+                default="allow" comment="allow|disallow"/>
+        <column xsi:type="varchar" name="path" length="1024" nullable="false"
+                default="/" comment="Path"/>
+        <column xsi:type="int" name="priority" unsigned="true" nullable="false"
+                default="10" comment="Priority"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" default="true"
+                comment="Active"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false"
+                default="CURRENT_TIMESTAMP" comment="Updated at"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="policy_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="PANTH_SEO_ROBOTS_POLICY_STORE_ID"
+                    table="panth_seo_robots_policy" column="store_id"
+                    referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="PANTH_SEO_ROBOTS_POLICY_IDX_STORE_UA" indexType="btree">
+            <column name="store_id"/>
+            <column name="user_agent"/>
+        </index>
+    </table>
+
+</schema>

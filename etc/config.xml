@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO — Default config values.
+ *
+ * The section id `panth_robots_seo` is deliberately scoped off so this module
+ * can coexist with Panth_AdvancedSEO's `panth_seo` section without colliding.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <panth_robots_seo>
+            <general>
+                <enabled>1</enabled>
+                <debug>0</debug>
+                <default_directive>index,follow</default_directive>
+                <noindex_filtered>1</noindex_filtered>
+                <noindex_search_results>1</noindex_search_results>
+                <noindex_paths>/customer/*
+/checkout
+/checkout/*
+/wishlist
+/wishlist/*
+/sales/*
+/contact
+/contact/*
+/contacts
+/contacts/*
+/catalogsearch/*
+/multishipping/*
+/newsletter/manage
+/newsletter/manage/*
+/review/customer/*
+/captcha
+/captcha/*
+/sendfriend/*
+/paypal/*
+/downloadable/customer/*
+/vault/*
+/giftcard/customer/*
+/rewards/*
+/oauth/*
+/connect/*</noindex_paths>
+                <max_image_preview>large</max_image_preview>
+                <max_snippet>-1</max_snippet>
+                <crawl_delay>0</crawl_delay>
+            </general>
+            <llm_bots>
+                <gptbot>1</gptbot>
+                <claudebot>1</claudebot>
+                <google_extended>1</google_extended>
+                <ccbot>0</ccbot>
+                <perplexitybot>1</perplexitybot>
+                <bytespider>0</bytespider>
+                <chatgpt_user>1</chatgpt_user>
+                <oai_searchbot>1</oai_searchbot>
+                <anthropic_ai>1</anthropic_ai>
+                <cohere_ai>1</cohere_ai>
+                <amazonbot>1</amazonbot>
+                <applebot_extended>1</applebot_extended>
+                <facebookbot>1</facebookbot>
+                <meta_externalagent>1</meta_externalagent>
+            </llm_bots>
+            <robots_txt>
+                <override_enabled>0</override_enabled>
+                <custom_body></custom_body>
+            </robots_txt>
+        </panth_robots_seo>
+    </default>
+</config>

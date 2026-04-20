@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO — Frontend-only DI.
+ *
+ * X-Robots-Tag plugin + the Magento_Robots router disablement BOTH live
+ * here so admin requests, API calls, and cron jobs never instantiate these
+ * types.
+ *
+ * The Magento_Robots core router intercepts `/robots.txt` at the router
+ * layer and dispatches to its own Index controller BEFORE any url_rewrite
+ * row runs. Disabling it here lets our controller take over.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- X-Robots-Tag plugin: frontend-only. -->
+    <type name="Magento\Framework\App\Response\Http">
+        <plugin name="panth_robots_seo_x_robots_tag"
+                type="Panth\RobotsSeo\Plugin\Response\XRobotsTagPlugin"
+                sortOrder="10"/>
+    </type>
+
+    <!-- Disable Magento core's robots.txt router so our controller wins. -->
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="robots" xsi:type="array">
+                    <item name="disable" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

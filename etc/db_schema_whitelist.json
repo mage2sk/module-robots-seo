@@ -1,0 +1,21 @@
+{
+    "panth_seo_robots_policy": {
+        "column": {
+            "policy_id": true,
+            "store_id": true,
+            "user_agent": true,
+            "directive": true,
+            "path": true,
+            "priority": true,
+            "is_active": true,
+            "updated_at": true
+        },
+        "index": {
+            "PANTH_SEO_ROBOTS_POLICY_IDX_STORE_UA": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "PANTH_SEO_ROBOTS_POLICY_STORE_ID": true
+        }
+    }
+}

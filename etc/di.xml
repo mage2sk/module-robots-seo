@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO — Global DI wiring.
+ *
+ * Shared between admin + frontend:
+ *   - Bind RobotsPolicyInterface to PolicyResolver.
+ *   - Register the grid data source for the Robots Policies UI component.
+ *   - Wire the Grid\Collection with its main table and resource model
+ *     (per the repo grid-collection rules: REAL class, never virtualType,
+ *     five matching PK locations all aligned on `policy_id`).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Panth\RobotsSeo\Api\RobotsPolicyInterface"
+                type="Panth\RobotsSeo\Model\Robots\PolicyResolver"/>
+
+    <!-- Robots Policies grid collection: real class, not a virtualType.
+         mainTable + resourceModel injected explicitly per the repo's grid
+         collection rules. -->
+    <type name="Panth\RobotsSeo\Model\ResourceModel\RobotsPolicy\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">panth_seo_robots_policy</argument>
+            <argument name="resourceModel" xsi:type="string">Panth\RobotsSeo\Model\ResourceModel\RobotsPolicy</argument>
+        </arguments>
+    </type>
+
+    <!-- Register the grid data source under the UI component name so the
+         framework's collection factory can spin it up. -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="panth_robots_seo_policy_listing_data_source"
+                      xsi:type="string">Panth\RobotsSeo\Model\ResourceModel\RobotsPolicy\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

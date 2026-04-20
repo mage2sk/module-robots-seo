@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO — Module declaration.
+ *
+ * Extracts the robots.txt endpoint, the X-Robots-Tag response header, the
+ * per-entity `<meta name="robots">` resolver, and the LLM-bot user-agent
+ * policy from Panth_AdvancedSEO into a standalone module.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Panth_RobotsSeo" setup_version="1.0.0">
+        <sequence>
+            <module name="Panth_Core"/>
+            <module name="Magento_Store"/>
+            <module name="Magento_Backend"/>
+            <module name="Magento_Catalog"/>
+            <module name="Magento_Cms"/>
+            <module name="Magento_Robots"/>
+        </sequence>
+    </module>
+</config>

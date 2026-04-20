@@ -1,0 +1,42 @@
+<?php
+/**
+ * @var \Panth\RobotsSeo\Block\Adminhtml\Robots $block
+ *
+ * Admin-only read-only preview of the generated robots.txt body. Every
+ * variable is escaped via `$block->escapeHtml()` / `escapeUrl()` even
+ * though the backing PolicyResolver already validates its inputs — the
+ * template is the last line of defence against a tampered DB row smuggling
+ * HTML into the admin UI.
+ */
+declare(strict_types=1);
+
+$content = $block->getRobotsContent();
+$frontendUrl = $block->getFrontendUrl();
+?>
+<div class="panth-robots-seo-preview" style="padding: 20px;">
+    <h2><?= $block->escapeHtml(__('robots.txt Preview')) ?></h2>
+
+    <p style="margin: 15px 0; color: #666;">
+        <?= $block->escapeHtml(__('This is the robots.txt body currently served to crawlers for the selected store scope. To edit it, manage the per-user-agent rows under Robots Policies or adjust the LLM-bot toggles under Configuration.')) ?>
+    </p>
+
+    <p>
+        <strong><?= $block->escapeHtml(__('Live URL:')) ?></strong>
+        <a href="<?= $block->escapeUrl($frontendUrl) ?>"
+           target="_blank" rel="noopener noreferrer"><?= $block->escapeHtml($frontendUrl) ?></a>
+    </p>
+
+    <div class="admin__field" style="margin-bottom: 20px;">
+        <label class="admin__field-label" for="robots_content">
+            <span><?= $block->escapeHtml(__('robots.txt Body')) ?></span>
+        </label>
+        <div class="admin__field-control">
+            <textarea id="robots_content"
+                      readonly
+                      class="admin__control-textarea"
+                      rows="24"
+                      style="width: 100%; max-width: 900px; font-family: monospace; font-size: 13px;"
+            ><?= $block->escapeHtml($content) ?></textarea>
+        </div>
+    </div>
+</div>

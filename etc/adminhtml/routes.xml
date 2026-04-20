@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO — Admin router declaration.
+ *
+ * The frontName `panth_robots_seo` scopes every admin action under
+ * /admin/panth_robots_seo/... so routes never collide with Panth_AdvancedSEO
+ * (`panth_seo`) if both modules are installed side by side.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="panth_robots_seo" frontName="panth_robots_seo">
+            <module name="Panth_RobotsSeo" before="Magento_Backend"/>
+        </route>
+    </router>
+</config>

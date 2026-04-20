@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO — Admin menu entries. Two links under Panth Infotech:
+ *   - Robots Policies grid (CRUD for per-UA rows)
+ *   - Configuration (jumps to the system.xml section)
+ * Plus a secondary entry for the robots.txt preview page.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Panth_RobotsSeo::root"
+             title="Robots &amp; LLM Bots"
+             module="Panth_RobotsSeo"
+             parent="Panth_Core::panth_extensions"
+             sortOrder="40"
+             resource="Panth_RobotsSeo::manage"/>
+
+        <add id="Panth_RobotsSeo::policies_menu"
+             title="Robots Policies"
+             module="Panth_RobotsSeo"
+             parent="Panth_RobotsSeo::root"
+             sortOrder="10"
+             action="panth_robots_seo/policy/index"
+             resource="Panth_RobotsSeo::policies"/>
+
+        <add id="Panth_RobotsSeo::robots_menu"
+             title="robots.txt Preview"
+             module="Panth_RobotsSeo"
+             parent="Panth_RobotsSeo::root"
+             sortOrder="20"
+             action="panth_robots_seo/robots/index"
+             resource="Panth_RobotsSeo::robots"/>
+
+        <add id="Panth_RobotsSeo::config_menu"
+             title="Configuration"
+             module="Panth_RobotsSeo"
+             parent="Panth_RobotsSeo::root"
+             sortOrder="30"
+             action="adminhtml/system_config/edit/section/panth_robots_seo"
+             resource="Panth_RobotsSeo::config"/>
+    </menu>
+</config>
