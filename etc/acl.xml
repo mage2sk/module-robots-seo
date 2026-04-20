@@ -27,9 +27,6 @@
                                       title="Save / Delete Robots Policies"
                                       sortOrder="10"/>
                         </resource>
-                        <resource id="Panth_RobotsSeo::config"
-                                  title="Panth Robots SEO Configuration"
-                                  sortOrder="30"/>
                     </resource>
                 </resource>
 
