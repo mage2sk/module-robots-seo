@@ -41,13 +41,13 @@
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Noindex Layered-Nav Filtered Pages</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>Emit <strong>noindex,follow</strong> when a catalog listing has layered-nav filters applied (sort/limit/attribute filters).</comment>
+                    <comment><![CDATA[Emit <strong>noindex,follow</strong> when a catalog listing has layered-nav filters applied (sort/limit/attribute filters).]]></comment>
                 </field>
                 <field id="noindex_search_results" translate="label comment" type="select" sortOrder="40"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Noindex Search Result Pages</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>Emit <strong>noindex,follow</strong> on <code>/catalogsearch/result/*</code> pages.</comment>
+                    <comment><![CDATA[Emit <strong>noindex,follow</strong> on <code>/catalogsearch/result/*</code> pages.]]></comment>
                 </field>
                 <field id="noindex_paths" translate="label comment" type="textarea" sortOrder="50"
                        showInDefault="1" showInWebsite="1" showInStore="1">
@@ -70,7 +70,7 @@
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Crawl-delay (seconds)</label>
                     <validate>validate-digits</validate>
-                    <comment>Emitted under <code>User-agent: *</code> in robots.txt. 0 omits the directive.</comment>
+                    <comment><![CDATA[Emitted under <code>User-agent: *</code> in robots.txt. 0 omits the directive.]]></comment>
                 </field>
             </group>
 
