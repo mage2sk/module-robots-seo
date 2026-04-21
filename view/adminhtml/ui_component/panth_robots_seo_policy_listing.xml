@@ -52,34 +52,30 @@
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
         <filters name="listing_filters"/>
-        <massaction name="listing_massaction">
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
             <action name="delete">
                 <settings>
+                    <url path="panth_robots_seo/policy/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
                     <confirm>
                         <title translate="true">Delete selected policies</title>
                         <message translate="true">Are you sure you want to delete the selected rows?</message>
                     </confirm>
-                    <type>delete</type>
-                    <label translate="true">Delete</label>
-                    <url path="panth_robots_seo/policy/massDelete"/>
                 </settings>
             </action>
             <action name="enable">
                 <settings>
+                    <url path="panth_robots_seo/policy/massStatus/status/1"/>
                     <type>enable</type>
                     <label translate="true">Enable</label>
-                    <url path="panth_robots_seo/policy/massStatus">
-                        <param name="status">1</param>
-                    </url>
                 </settings>
             </action>
             <action name="disable">
                 <settings>
+                    <url path="panth_robots_seo/policy/massStatus/status/0"/>
                     <type>disable</type>
                     <label translate="true">Disable</label>
-                    <url path="panth_robots_seo/policy/massStatus">
-                        <param name="status">0</param>
-                    </url>
                 </settings>
             </action>
         </massaction>
