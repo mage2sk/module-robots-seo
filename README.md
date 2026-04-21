@@ -97,18 +97,6 @@ End-to-end admin flow — enable the module, toggle a few LLM bots, add a policy
 
 ![robots.txt preview](docs/images/robots-txt-preview.png)
 
-### Storefront — Hyvä
-
-**`/robots.txt`** — served by our controller, LLM-bot `Disallow: /` blocks at the top, default `User-agent: *` block, admin policy rows, then `Sitemap:` and `Host:` lines.
-
-![Hyvä robots.txt](docs/images/hyva-robots-txt.png)
-
-### Storefront — Luma
-
-**`/robots.txt`** — identical output on Luma; the module is theme-agnostic because it only emits HTTP headers and plain text.
-
-![Luma robots.txt](docs/images/luma-robots-txt.png)
-
 ---
 
 ## Features
