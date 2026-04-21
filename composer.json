@@ -2,7 +2,7 @@
     "name": "mage2kishan/module-robots-seo",
     "description": "Panth Robots SEO — dedicated robots.txt, X-Robots-Tag, and LLM-bot (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.) policy control for Magento 2. Extracted from Panth_AdvancedSEO. Self-contained: emits a per-store robots.txt, adds X-Robots-Tag response headers, validates robots meta directives, and exposes admin CRUD for user-agent / path policies. Hyva and Luma compatible.",
     "type": "magento2-module",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "proprietary",
     "keywords": [
         "magento2",

@@ -40,13 +40,20 @@ class Save extends AbstractAction implements HttpPostActionInterface
         $request = $this->getRequest();
 
         try {
-            $policyId  = (int) $request->getParam('policy_id', 0);
-            $storeId   = (int) $request->getParam('store_id', 0);
-            $userAgent = trim((string) $request->getParam('user_agent', ''));
-            $directive = strtolower(trim((string) $request->getParam('directive', 'allow')));
-            $path      = trim((string) $request->getParam('path', '/'));
-            $priority  = (int) $request->getParam('priority', 10);
-            $isActive  = (int) (bool) $request->getParam('is_active', 1);
+            // ui_component forms submit with `dataScope=data` so fields land
+            // as request params AND as `data[<field>]` via getPostValue().
+            // Merge both so the controller works regardless of submit mode.
+            $post = (array) $request->getPostValue();
+            $nested = (array) ($post['data'] ?? []);
+            $get = static fn(string $k, $d) => $nested[$k] ?? $post[$k] ?? $request->getParam($k, $d);
+
+            $policyId  = (int) $get('policy_id', 0);
+            $storeId   = (int) $get('store_id', 0);
+            $userAgent = trim((string) $get('user_agent', ''));
+            $directive = strtolower(trim((string) $get('directive', 'allow')));
+            $path      = trim((string) $get('path', '/'));
+            $priority  = (int) $get('priority', 10);
+            $isActive  = (int) (bool) $get('is_active', 1);
 
             if (!$this->validator->isValidUserAgent($userAgent)) {
                 throw new LocalizedException(__('User agent must contain only letters, digits, and . _ - + * / characters (no control chars or line breaks).'));

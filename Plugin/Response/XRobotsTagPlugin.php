@@ -45,8 +45,8 @@ class XRobotsTagPlugin
         private readonly StoreManagerInterface $storeManager,
         private readonly LoggerInterface $logger,
         private readonly DirectiveValidator $validator,
-        private readonly ?RobotsMetaResolver $robotsMetaResolver = null,
-        private readonly ?NoindexPathMatcher $noindexPathMatcher = null
+        private readonly RobotsMetaResolver $robotsMetaResolver,
+        private readonly NoindexPathMatcher $noindexPathMatcher
     ) {
     }
 
@@ -66,6 +66,15 @@ class XRobotsTagPlugin
                 return;
             }
 
+            $requestUri = (string) $this->request->getRequestUri();
+
+            // The /robots.txt response is served by our own controller which
+            // already sets X-Robots-Tag: noindex. Do not overwrite it.
+            $requestPath = (string) (parse_url($requestUri, PHP_URL_PATH) ?? '');
+            if ($requestPath === '/robots.txt') {
+                return;
+            }
+
             // Error responses (404/410/5xx) must never be indexed, regardless of
             // any other configuration. The HTTP header takes precedence over
             // `<meta name="robots">` per Google docs.
@@ -76,7 +85,6 @@ class XRobotsTagPlugin
 
             // Non-HTML document responses (.pdf, .doc, ...) should not be
             // indexed by default.
-            $requestUri = (string) $this->request->getRequestUri();
             if ($this->isNoindexAssetUrl($requestUri)) {
                 $this->setHeaderSafely($subject, 'noindex, nofollow');
                 return;
@@ -89,17 +97,14 @@ class XRobotsTagPlugin
             }
 
             // Private / customer-scoped paths — always noindex,nofollow.
-            if ($this->noindexPathMatcher !== null
-                && $this->noindexPathMatcher->isNoindexPath($requestUri, $storeId)) {
+            if ($this->noindexPathMatcher->isNoindexPath($requestUri, $storeId)) {
                 $this->setHeaderSafely($subject, 'noindex, nofollow');
                 return;
             }
 
             // Default HTML response branch.
             $robots = $this->robotsPolicy->getHeaderRobots('', 0, $storeId);
-            if ($this->robotsMetaResolver !== null) {
-                $robots = $this->robotsMetaResolver->appendAdvancedDirectives($robots, $storeId);
-            }
+            $robots = $this->robotsMetaResolver->appendAdvancedDirectives($robots, $storeId);
             if ($robots === '') {
                 $robots = 'index, follow';
             }
@@ -125,6 +130,24 @@ class XRobotsTagPlugin
             $safe = DirectiveValidator::DEFAULT_DIRECTIVE;
         }
         $subject->setHeader('X-Robots-Tag', $safe, true);
+
+        // Debug logging — only emits when the merchant has flipped
+        // `panth_robots_seo/general/debug` on. Routes through the dedicated
+        // `Panth\RobotsSeo\Logger\Logger` virtualType so the line lands in
+        // `var/log/panth_robots_seo.log` rather than the generic system log.
+        try {
+            $storeId = (int) $this->storeManager->getStore()->getId();
+            if ($this->config->isDebug($storeId)) {
+                $this->logger->info(sprintf(
+                    'X-Robots-Tag set uri=%s status=%d directive=%s',
+                    (string) $this->request->getRequestUri(),
+                    (int) $subject->getStatusCode(),
+                    $safe
+                ));
+            }
+        } catch (\Throwable) {
+            // Never let debug logging break the response.
+        }
     }
 
     private function isFrontendArea(): bool

@@ -52,27 +52,46 @@
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
         <filters name="listing_filters"/>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <title translate="true">Delete selected policies</title>
+                        <message translate="true">Are you sure you want to delete the selected rows?</message>
+                    </confirm>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                    <url path="panth_robots_seo/policy/massDelete"/>
+                </settings>
+            </action>
+            <action name="enable">
+                <settings>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                    <url path="panth_robots_seo/policy/massStatus">
+                        <param name="status">1</param>
+                    </url>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                    <url path="panth_robots_seo/policy/massStatus">
+                        <param name="status">0</param>
+                    </url>
+                </settings>
+            </action>
+        </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
 
     <columns name="panth_robots_seo_policy_columns">
-        <settings>
-            <editorConfig>
-                <param name="selectProvider" xsi:type="string">panth_robots_seo_policy_listing.panth_robots_seo_policy_listing.panth_robots_seo_policy_columns.ids</param>
-                <param name="enabled" xsi:type="boolean">false</param>
-                <param name="indentationTmpl" xsi:type="string">ui/grid/tree-massactions</param>
-            </editorConfig>
-            <childDefaults>
-                <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">panth_robots_seo_policy_listing.panth_robots_seo_policy_listing.panth_robots_seo_policy_columns_editor</item>
-                    <item name="target" xsi:type="string">startEdit</item>
-                    <item name="params" xsi:type="array">
-                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
-                        <item name="1" xsi:type="boolean">true</item>
-                    </item>
-                </param>
-            </childDefaults>
-        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>policy_id</indexField>
+            </settings>
+        </selectionsColumn>
 
         <column name="policy_id" sortOrder="10">
             <settings>
@@ -137,5 +156,12 @@
                 <label translate="true">Updated</label>
             </settings>
         </column>
+
+        <actionsColumn name="actions" class="Panth\RobotsSeo\Ui\Component\Listing\Column\PolicyActions" sortOrder="90">
+            <settings>
+                <indexField>policy_id</indexField>
+                <label translate="true">Action</label>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>

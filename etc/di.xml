@@ -17,6 +17,30 @@
     <preference for="Panth\RobotsSeo\Api\RobotsPolicyInterface"
                 type="Panth\RobotsSeo\Model\Robots\PolicyResolver"/>
 
+    <!-- Dedicated log channel written to var/log/panth_robots_seo.log. The
+         XRobotsTagPlugin queries Config::isDebug() and only pushes a record
+         when the merchant has explicitly enabled debug logging, so the file
+         stays quiet in production. -->
+    <virtualType name="Panth\RobotsSeo\Logger\Handler"
+                 type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/panth_robots_seo.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Panth\RobotsSeo\Logger\Logger" type="Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">panth_robots_seo</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Panth\RobotsSeo\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Panth\RobotsSeo\Plugin\Response\XRobotsTagPlugin">
+        <arguments>
+            <argument name="logger" xsi:type="object">Panth\RobotsSeo\Logger\Logger</argument>
+        </arguments>
+    </type>
+
     <!-- Robots Policies grid collection: real class, not a virtualType.
          mainTable + resourceModel injected explicitly per the repo's grid
          collection rules. -->

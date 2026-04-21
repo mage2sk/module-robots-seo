@@ -22,6 +22,14 @@
                 sortOrder="10"/>
     </type>
 
+    <!-- HTML <meta name="robots"> plugin: rewrites the tag so it matches
+         the X-Robots-Tag header and reflects per-path noindex rules. -->
+    <type name="Magento\Framework\View\Page\Config">
+        <plugin name="panth_robots_seo_meta_robots"
+                type="Panth\RobotsSeo\Plugin\Page\RobotsMetaPlugin"
+                sortOrder="20"/>
+    </type>
+
     <!-- Disable Magento core's robots.txt router so our controller wins. -->
     <type name="Magento\Framework\App\RouterList">
         <arguments>

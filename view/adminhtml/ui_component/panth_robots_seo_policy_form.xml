@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Admin form for a single `panth_seo_robots_policy` row. Wired from
+ * `view/adminhtml/layout/panth_robots_seo_policy_edit.xml` and
+ * `panth_robots_seo_policy_new.xml`.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">panth_robots_seo_policy_form.panth_robots_seo_policy_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="delete"            class="Panth\RobotsSeo\Block\Adminhtml\Policy\Edit\DeleteButton"/>
+            <button name="save_and_continue" class="Panth\RobotsSeo\Block\Adminhtml\Policy\Edit\SaveAndContinueButton"/>
+            <button name="save"              class="Panth\RobotsSeo\Block\Adminhtml\Policy\Edit\SaveButton"/>
+            <button name="back"              class="Panth\RobotsSeo\Block\Adminhtml\Policy\Edit\BackButton"/>
+        </buttons>
+        <namespace>panth_robots_seo_policy_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>panth_robots_seo_policy_form.panth_robots_seo_policy_form_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="panth_robots_seo_policy_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="panth_robots_seo/policy/save"/>
+        </settings>
+        <dataProvider class="Panth\RobotsSeo\Ui\Component\Form\DataProvider\PolicyFormDataProvider"
+                      name="panth_robots_seo_policy_form_data_source">
+            <settings>
+                <requestFieldName>policy_id</requestFieldName>
+                <primaryFieldName>policy_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="general">
+        <settings>
+            <label translate="true">General</label>
+        </settings>
+
+        <field name="policy_id" formElement="input">
+            <settings>
+                <visible>false</visible>
+                <dataType>text</dataType>
+                <dataScope>policy_id</dataScope>
+            </settings>
+        </field>
+
+        <field name="user_agent" sortOrder="10" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">User-agent</label>
+                <dataScope>user_agent</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <notice translate="true">Crawler user-agent string, or `*` for the default block. Letters, digits and . _ - + * / only (no CR/LF or control chars).</notice>
+            </settings>
+        </field>
+
+        <field name="directive" sortOrder="20" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Directive</label>
+                <dataScope>directive</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Panth\RobotsSeo\Model\Config\Source\DirectiveAction"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="path" sortOrder="30" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Path</label>
+                <dataScope>path</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <notice translate="true">Must start with `/`. Supports `*` wildcards (e.g. `/checkout/*`).</notice>
+            </settings>
+        </field>
+
+        <field name="store_id" sortOrder="40" formElement="select">
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Store View</label>
+                <dataScope>store_id</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Store\Model\System\Store"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="priority" sortOrder="50" formElement="input">
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Priority</label>
+                <dataScope>priority</dataScope>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <notice translate="true">Lower numbers are emitted first in robots.txt. Default is 10.</notice>
+            </settings>
+        </field>
+
+        <field name="is_active" sortOrder="60" formElement="select">
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Active</label>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>
