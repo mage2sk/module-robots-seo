@@ -6,7 +6,6 @@ namespace Panth\RobotsSeo\Model\Robots;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\Url as FrameworkUrl;
 use Magento\Store\Model\ScopeInterface;
 use Panth\RobotsSeo\Helper\Config;
 use Panth\RobotsSeo\Service\DirectiveValidator;
@@ -121,34 +120,15 @@ class MetaResolver
 
     private function isNoindexByUrlPattern(int $storeId): bool
     {
-        // Pretty filter URLs (rewritten by FilterRouter) are the canonical
-        // SEO surface — never noindex them. The URL alias is set whenever
-        // a router has matched the path, so its presence is a reliable
-        // "this is already a canonical URL" signal.
-        if ((string) $this->request->getAlias(FrameworkUrl::REWRITE_REQUEST_PATH_ALIAS) !== '') {
-            $path = (string) $this->request->getPathInfo();
-            if (str_contains($path, 'catalogsearch/result')
-                && $this->config->isNoindexSearchResults($storeId)) {
-                return true;
-            }
-            return false;
-        }
-
-        // Read filter codes from the QUERY STRING only ($_GET) — never from
-        // $request->getParams(), which also contains router-set params.
-        // Otherwise pretty URLs that FilterRouter has decorated with
-        // attribute params would be misclassified as filtered (and noindex'd).
+        // Read filter codes from $_GET only, never from $request->getParams().
+        // FilterRouter::match() (Panth_FilterSeo) does setParam() for filter
+        // attribute codes on pretty URLs — those router-set params look
+        // identical to user $_GET filters via getParams(), which would cause
+        // every pretty filter URL (the canonical SEO surface) to be flagged
+        // noindex,follow.
         $query = $this->request->getQuery()->toArray();
-        if ($query === []) {
-            $path = (string) $this->request->getPathInfo();
-            if (str_contains($path, 'catalogsearch/result')
-                && $this->config->isNoindexSearchResults($storeId)) {
-                return true;
-            }
-            return false;
-        }
 
-        if ($this->config->isEnabled($storeId) && $this->hasFilterParams($query)
+        if ($query !== [] && $this->config->isEnabled($storeId) && $this->hasFilterParams($query)
             && $this->config->isNoindexFiltered($storeId)) {
             return true;
         }
