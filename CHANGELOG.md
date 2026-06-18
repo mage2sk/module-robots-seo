@@ -4,6 +4,12 @@ All notable changes to Panth_RobotsSeo will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and the project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.0.8] - 2026-06-18
+
+### Changed
+
+- README rewrite: restructured to match the Panth Infotech module template with Quick Answer, Who Is It For, Key Features, Screenshots, Configuration table, Supported LLM Bots table, FAQ, and Quick Links sections. All content verified against system.xml, db_schema.xml, and controller code. Screenshots section preserved from the previous README.
+
 ## [1.0.2]
 
 ### Fixed

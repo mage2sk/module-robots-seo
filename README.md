@@ -1,29 +1,48 @@
 <!-- SEO Meta -->
 <!--
-  Title: Panth Robots SEO — Dedicated robots.txt, X-Robots-Tag & LLM Bot Policy for Magento 2 (Hyva + Luma)
-  Description: Full control over robots.txt, X-Robots-Tag response headers, and LLM / AI crawler (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Bytespider, CCBot, Applebot-Extended, Meta-ExternalAgent, Amazonbot, Cohere-AI and more) policy for Magento 2. Dynamic per-store robots.txt with admin CRUD policy rows, status-code-aware X-Robots-Tag header, noindex path matcher, layered-nav and catalogsearch noindex, non-HTML asset noindex, CRLF-injection-safe directive validator, and custom robots.txt body override. Works identically on Hyva and Luma. Extracted from Panth_AdvancedSEO for standalone installation.
-  Keywords: magento 2 robots.txt, magento 2 x-robots-tag, magento 2 llm bots, magento 2 ai crawler policy, magento gptbot, magento claudebot, magento perplexitybot, magento google-extended, magento 2 noindex, magento 2 layered nav noindex, magento 2 catalogsearch noindex, magento 2 seo headers, magento robots meta, hyva robots seo, luma robots seo, magento crlf header injection
+  Title: Magento 2 Robots SEO Extension: robots.txt, X-Robots-Tag and LLM Bot Policy Control (Hyva + Luma)
+  Description: Panth Robots SEO gives Magento 2 stores full control over robots.txt per store view, X-Robots-Tag HTTP response headers, noindex path matching, and one-click allow/disallow toggles for 14 AI and LLM crawlers including GPTBot, ClaudeBot, PerplexityBot, Google-Extended, and Bytespider. Works on Hyva and Luma. Built by Top Rated Plus Magento developer Kishan Savaliya.
+  Keywords: magento 2 robots.txt, magento 2 x-robots-tag, magento 2 llm bot policy, magento 2 ai crawler control, magento gptbot block, magento claudebot, magento perplexitybot, magento 2 noindex, magento 2 seo headers, magento 2 robots seo, hyva robots seo, luma robots seo, magento 2 crawl delay, magento 2 noindex layered nav
   Author: Kishan Savaliya (Panth Infotech)
+  Canonical: https://kishansavaliya.com/magento-2-robots-seo.html
 -->
 
-# Panth Robots SEO — Dedicated robots.txt, X-Robots-Tag & LLM Bot Policy for Magento 2 (Hyva + Luma)
+# Magento 2 Robots SEO Extension: robots.txt, X-Robots-Tag and LLM Bot Policy Control (Hyva + Luma)
 
 [![Magento 2.4.4 - 2.4.8](https://img.shields.io/badge/Magento-2.4.4%20--%202.4.8-orange?logo=magento&logoColor=white)](https://magento.com)
 [![PHP 8.1 - 8.4](https://img.shields.io/badge/PHP-8.1%20--%208.4-blue?logo=php&logoColor=white)](https://php.net)
-[![Hyva Compatible](https://img.shields.io/badge/Hyva-Compatible-14b8a6?logo=alpinedotjs&logoColor=white)](https://hyva.io)
-[![Luma Compatible](https://img.shields.io/badge/Luma-Compatible-orange)]()
+[![Hyva + Luma](https://img.shields.io/badge/Themes-Hyva%20%2B%20Luma-14b8a6)](https://www.hyva.io)
+[![Live Demo & Details](https://img.shields.io/badge/Live%20Demo%20%26%20Details-magento--2--robots--seo-0D9488?style=flat)](https://kishansavaliya.com/magento-2-robots-seo.html)
 [![Packagist](https://img.shields.io/badge/Packagist-mage2kishan%2Fmodule--robots--seo-orange?logo=packagist&logoColor=white)](https://packagist.org/packages/mage2kishan/module-robots-seo)
 [![Upwork Top Rated Plus](https://img.shields.io/badge/Upwork-Top%20Rated%20Plus-14a800?logo=upwork&logoColor=white)](https://www.upwork.com/freelancers/~016dd1767321100e21)
 [![Website](https://img.shields.io/badge/Website-kishansavaliya.com-0D9488)](https://kishansavaliya.com)
-[![Get a Quote](https://img.shields.io/badge/Get%20a%20Quote-Free%20Estimate-DC2626)](https://kishansavaliya.com/get-quote)
 
-> **Complete robots and crawler-policy control for Magento 2.** One module takes over `/robots.txt` at the router layer, emits an `X-Robots-Tag` HTTP response header on every frontend HTML page, adds per-user-agent allow/disallow rows via an admin grid, and toggles fourteen modern LLM / AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Bytespider, CCBot, Applebot-Extended, Meta-ExternalAgent, Amazonbot, Cohere-AI, and more) with a single click. Every directive passes a CRLF-safe validator before it ever reaches the wire. Works identically on **Hyva** and **Luma**.
+> **Full robots and crawler policy control for Magento 2.** Panth Robots SEO takes over `/robots.txt` at the router layer, emits an `X-Robots-Tag` HTTP header on every frontend response, and gives you one-click toggles for 14 AI and LLM crawlers including GPTBot, ClaudeBot, PerplexityBot, and Google-Extended. Every directive passes a CRLF-safe validator before it reaches the wire. Works identically on **Hyva** and **Luma**.
 
-Magento's native robots handling is three things that no longer add up: a **static `robots.txt` file** on disk, a **single admin textarea** buried under *Content → Design → Configuration* that overwrites it, and **no `X-Robots-Tag` header control** whatsoever. There is also no UI for the new generation of AI crawlers — GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Bytespider — so stores either open their data to every model trainer by default or hand-edit the file on every deploy. **Panth Robots SEO** unifies all three layers (robots.txt body, robots meta, `X-Robots-Tag` header) into one coherent admin surface with a dedicated controller, a declarative schema-backed policy grid, and a directive validator that makes CRLF header injection structurally impossible.
+**Product page:** [kishansavaliya.com/magento-2-robots-seo.html](https://kishansavaliya.com/magento-2-robots-seo.html)
+
+---
+
+## Quick Answer
+
+**What is Panth Robots SEO?** It is a Magento 2 extension that replaces Magento's limited robots handling with a dedicated controller for `/robots.txt`, a per-response `X-Robots-Tag` HTTP header, and an admin UI for managing per-user-agent path policies and AI crawler access.
+
+**What does it add to my store?**
+
+- A **dynamic `/robots.txt` per store view** built from LLM bot toggles, admin policy rows, crawl-delay, and sitemap references. No static file is ever read from disk.
+- **14 LLM and AI crawler toggles** for GPTBot, ClaudeBot, ChatGPT-User, PerplexityBot, Google-Extended, Cohere-AI, Bytespider, and more. One click blocks or allows each bot.
+- An **`X-Robots-Tag` HTTP response header** on every frontend HTML page, with automatic noindex for error pages, private paths, layered-nav filters, and search result pages.
+- An **admin CRUD grid** for per-user-agent, per-path, per-store-view allow/disallow rows, plus a live **robots.txt Preview** page so you can verify output before it goes public.
+
+**Which themes are supported?** Both **Hyva** and **Luma**. The module works at the controller and plugin layer, so no theme-specific template is needed.
+
+**What does it need?** Magento 2.4.4 to 2.4.8, PHP 8.1 to 8.4, and the free `mage2kishan/module-core` package.
 
 ---
 
 ## Need Custom Magento 2 Development?
+
+> **Get a free quote for your project in 24 hours** for custom modules, Hyva themes, performance work, M1 to M2 migrations, and Adobe Commerce Cloud.
 
 <p align="center">
   <a href="https://kishansavaliya.com/get-quote">
@@ -40,159 +59,168 @@ Magento's native robots handling is three things that no longer add up: a **stat
 
 [![Hire on Upwork](https://img.shields.io/badge/Hire%20on%20Upwork-Top%20Rated%20Plus-14a800?style=for-the-badge&logo=upwork&logoColor=white)](https://www.upwork.com/freelancers/~016dd1767321100e21)
 
+100% Job Success - 10+ Years Magento Experience
+Adobe Certified - Hyva Specialist
+
 </td>
 <td width="50%" align="center">
 
 ### Panth Infotech Agency
+**Magento Development Team**
 
 [![Visit Agency](https://img.shields.io/badge/Visit%20Agency-Panth%20Infotech-14a800?style=for-the-badge&logo=upwork&logoColor=white)](https://www.upwork.com/agencies/1881421506131960778/)
+
+Custom Modules - Theme Design - Migrations
+Performance - SEO - Adobe Commerce Cloud
 
 </td>
 </tr>
 </table>
 
+**Visit our website:** [kishansavaliya.com](https://kishansavaliya.com) &nbsp;|&nbsp; **Get a quote:** [kishansavaliya.com/get-quote](https://kishansavaliya.com/get-quote)
+
 ---
 
 ## Table of Contents
 
-- [Preview](#preview)
-- [Features](#features)
-- [How It Works](#how-it-works)
-- [Supported LLM Bots](#supported-llm-bots)
+- [Who Is It For](#who-is-it-for)
+- [Key Features](#key-features)
+- [Screenshots](#screenshots)
 - [Compatibility](#compatibility)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [Managing Robots Policies](#managing-robots-policies)
-- [robots.txt Endpoint](#robotstxt-endpoint)
-- [X-Robots-Tag Header](#x-robots-tag-header)
-- [Security](#security)
-- [Troubleshooting](#troubleshooting)
+- [Supported LLM Bots](#supported-llm-bots)
+- [How It Works](#how-it-works)
+- [FAQ](#faq)
 - [Support](#support)
+- [About Panth Infotech](#about-panth-infotech)
+- [Quick Links](#quick-links)
 
 ---
 
-## Preview
+## Who Is It For
 
-### Live walkthrough
+- **Stores worried about AI training scrapers** that want to block GPTBot, Bytespider, CCBot, or other data-collection bots in one click rather than hand-editing a file on every deploy.
+- **SEO-conscious merchants** who need layered-nav pages, search result pages, and customer account paths excluded from indexing through proper HTTP headers, not just a meta tag.
+- **Multi-store setups** where each store view needs its own robots.txt body, noindex path list, and LLM bot policy.
+- **Stores upgrading from Panth_AdvancedSEO** that want robots handling as a standalone, self-contained module without pulling in the full SEO suite.
+- **Developers** who need a structured, schema-backed policy grid instead of a single admin textarea with no validation.
 
-End-to-end admin flow — enable the module, toggle a few LLM bots, add a policy row, preview the generated `robots.txt`, curl `/robots.txt` on both Hyva and Luma, and confirm the `X-Robots-Tag` header on a customer-account page. Click to play.
+---
+
+## Key Features
+
+### Dynamic robots.txt Per Store View
+- **Router-level controller** takes over `/robots.txt` so the response is built from live config every time. No static file is ever served.
+- **LLM and AI bot blocks** are written as `User-agent: <bot>\nDisallow: /` sections when their toggle is set to No.
+- **Admin policy rows** from the `panth_seo_robots_policy` table are merged under the matching user-agent block.
+- **Crawl-delay, Sitemap, and Host** lines are appended automatically from config.
+- **Custom body override** lets you paste your own robots.txt verbatim and skip the generation pipeline entirely.
+
+### X-Robots-Tag HTTP Response Header
+- **Added to every frontend HTML response** by `Plugin\Response\XRobotsTagPlugin` before the response is sent.
+- **Automatic noindex for error pages** (404, 410, 500, 503), non-HTML assets (.pdf, .doc, .xls), layered-nav filter pages, and search result pages.
+- **Configurable noindex path list** with wildcard `*` support for private paths like `/customer/*`, `/checkout`, `/wishlist`, and more.
+- **max-image-preview and max-snippet** are appended to every header value, including the `large` setting recommended for Google Discover.
+
+### 14 LLM and AI Crawler Toggles
+- **One Yes/No toggle per bot** in the LLM Bot Policy config group. Turning a bot to No writes a `Disallow: /` block for that user-agent in robots.txt.
+- **Bots covered:** GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot (covers Claude-Web too), Anthropic-AI, Google-Extended (covers GoogleOther), PerplexityBot, Cohere-AI, CCBot, Bytespider, Amazonbot, Applebot-Extended, FacebookBot, Meta-ExternalAgent.
+- **CCBot and Bytespider are blocked by default** because they feed large-scale training pipelines and are known to ignore partial disallows.
+
+### Admin Policy Grid and robots.txt Preview
+- **`panth_seo_robots_policy` table** stores per-user-agent, per-path, per-store-view allow/disallow rows with a priority column.
+- **Full CRUD grid** at Admin - Panth Infotech - Robots & LLM Bots - Robots Policies with mass enable, disable, and delete actions.
+- **robots.txt Preview page** renders the live output for any store view so you can check the result before it goes public.
+- **Store-view scope** on every row and config value so each store can have its own policy.
+
+### Security Built In
+- **CRLF-injection-safe** validator runs on every directive string before it reaches a response header or the robots.txt body. `\r`, `\n`, and `\0` are rejected outright.
+- **User-agent and path validation** on every policy save. UAs must match `/^[A-Za-z0-9._\-+*\/ ]+$/`; paths must start with `/` and contain no control bytes.
+- **ACL on every admin controller.** All routes require a valid admin session and declare their own `ADMIN_RESOURCE`.
+- **XSS-safe Preview page** renders the robots.txt body through `escapeHtml()` so a hostile custom body cannot execute script in the admin browser.
+
+### Built to Last
+- **Constructor DI only** across all classes. No ObjectManager calls.
+- **Full Page Cache friendly.** The robots.txt controller and the X-Robots-Tag plugin do not break Varnish or Fastly.
+- **Translation ready.** All admin labels use Magento's `__()` function.
+- **Zero data loss on upgrade from Panth_AdvancedSEO.** The `panth_seo_robots_policy` table name is preserved and the schema shapes match exactly.
+
+---
+
+## Screenshots
+
+### Live Walkthrough
+
+End-to-end admin flow: enable the module, toggle a few LLM bots, add a policy row, preview the generated robots.txt, curl `/robots.txt` on both Hyva and Luma, and confirm the `X-Robots-Tag` header on a customer account page.
 
 ![Panth Robots SEO demo](docs/images/demo.gif)
 
-### Admin
+### Admin Configuration
 
-**Global configuration** — toggle the module, pick the default `<meta name="robots">` value, configure layered-nav and catalogsearch noindex, edit the noindex path list, set `max-image-preview` / `max-snippet` / `Crawl-delay`.
+Global configuration: toggle the module, set the default meta robots value, configure layered-nav and catalogsearch noindex, edit the noindex path list, and set max-image-preview, max-snippet, and Crawl-delay.
 
 ![Admin configuration](docs/images/admin-config.png)
 
-**Robots Policies grid** — one row per (user-agent, path, directive, store_id) tuple. Filter by store, mass-enable / disable / delete, inline priority column so the evaluator knows which rule wins when two patterns overlap.
+### Robots Policies Grid
+
+One row per user-agent, path, directive, and store view combination. Filter by store, mass-enable, disable or delete, and set priority so the evaluator knows which rule wins when two patterns overlap.
 
 ![Admin grid](docs/images/admin-grid.png)
 
-**Edit form — policy row** — pick a user-agent (`*` for the default block, or `GPTBot`, `ClaudeBot`, a custom UA, etc.), pick allow / disallow, enter a path, scope to a store view, set priority and active flag. The UA and path fields are validated against a whitelist regex before save.
+### Policy Edit Form
+
+Pick a user-agent (`*` for the default block, or `GPTBot`, `ClaudeBot`, a custom crawler), pick allow or disallow, enter a path, scope to a store view, and set priority and active flag.
 
 ![Admin edit form](docs/images/admin-edit.png)
 
-**robots.txt preview** — dedicated **Panth Infotech → Robots & LLM Bots → robots.txt Preview** page renders the live body exactly as the frontend will serve it, with a store-switcher so you can verify each store view before rolling to production.
+### robots.txt Preview
+
+Dedicated Panth Infotech - Robots & LLM Bots - robots.txt Preview page renders the live body for the selected store view, exactly as the frontend controller will serve it.
 
 ![robots.txt preview](docs/images/robots-txt-preview.png)
 
 ---
 
-## Features
-
-| Feature | Description |
-|---|---|
-| **Dynamic `/robots.txt` per store view** | Built on the fly from LLM-bot toggles (emitted as `User-agent: <bot>\nDisallow: /` blocks when disabled), a `User-agent: *` block with admin policy rows and `Crawl-delay`, then `Sitemap:` and `Host:` lines. No static file ever leaves disk. |
-| **14 LLM / AI crawler toggles** | One-click allow/disallow for GPTBot (`GPTBot`), ChatGPT-User (`ChatGPT-User`), OAI-SearchBot (`OAI-SearchBot`), ClaudeBot (maps both `ClaudeBot` and `Claude-Web`), Anthropic-AI (`anthropic-ai`), Google-Extended (maps both `Google-Extended` and `GoogleOther`), PerplexityBot (`PerplexityBot`), Cohere-AI (`cohere-ai`), CCBot (`CCBot`), Bytespider (`Bytespider`), Amazonbot (`Amazonbot`), Applebot-Extended (`Applebot-Extended`), FacebookBot (`FacebookBot`), Meta-ExternalAgent (`meta-externalagent`). |
-| **`X-Robots-Tag` response header** | Added to every frontend HTML response by `Plugin\Response\XRobotsTagPlugin` with `max-image-preview:<large\|standard\|none>` and `max-snippet:<int>` appended to the chosen directive. Handled before `Response::sendResponse()` so the header is always present. |
-| **Noindex path matcher** | `Service\NoindexPathMatcher` walks an admin-editable list of path patterns (`*` wildcards supported). Defaults cover `/customer/*`, `/checkout*`, `/wishlist*`, `/sales/*`, `/contact*`, `/catalogsearch/*`, `/multishipping/*`, `/newsletter/manage*`, `/review/customer/*`, `/captcha*`, `/sendfriend/*`, `/paypal/*`, `/downloadable/customer/*`, `/vault/*`, `/giftcard/customer/*`, `/rewards/*`, `/oauth/*`, `/connect/*`. |
-| **Layered-nav / sort-filter noindex** | When a catalog listing has any `?p=`, `?dir=`, `?order=`, `?limit=`, or layered-nav attribute query parameter, the header flips to `noindex, follow` so filtered permutations don't dilute the canonical listing. |
-| **Catalogsearch noindex** | `/catalogsearch/result/*` pages emit `noindex, follow` by default — searches are inherently ephemeral and shouldn't be indexed. |
-| **HTTP-status-aware override** | 404, 410, 500 and 503 responses hard-override the header to `noindex, nofollow` regardless of config, so error pages can never leak into the index. |
-| **Non-HTML asset noindex** | Requests ending in `.pdf`, `.doc`, `.docx`, `.xls`, `.xlsx` emit `noindex, nofollow` — stops support docs and spec sheets from displacing the canonical product page in the SERP. |
-| **`robots.txt` custom-body override** | `robots_txt/override_enabled = 1` pastes `robots_txt/custom_body` verbatim into the response and skips the entire generation pipeline. CRLF is normalised to LF on write. |
-| **Admin CRUD grid** | `panth_seo_robots_policy` table with a full UI-component grid — per-UA, per-path, per-store-view allow/disallow rows with priority and active flag. Dedicated **robots.txt Preview** admin page renders the live output. |
-| **CRLF-injection-safe** | Every directive string passes `Service\DirectiveValidator` (printable-ASCII whitelist, rejects `\r`, `\n`, `\0`). Every path and UA is validated against a whitelist regex before the DB write. |
-
----
-
-## How It Works
-
-Seven cooperating pieces:
-
-1. **`Controller\Robots\Index`** at route `seo_robots/robots/index` serves `GET /robots.txt` with the generated or override body, `Content-Type: text/plain; charset=utf-8`.
-2. **`Setup\Patch\Data\InstallRobotsTxtRewrite`** writes the `url_rewrite` row that maps `/robots.txt` to the module controller at install time; **`RefreshRobotsTxtRewrite`** re-points an existing stale target_path row left behind by Panth_AdvancedSEO so upgrades are a no-op.
-3. **`etc/frontend/di.xml`** disables the core `Magento\Framework\App\RouterList` entry for `robots` — Magento's built-in robots router no longer intercepts `/robots.txt` before the url_rewrite layer, so our controller wins.
-4. **`Plugin\Response\XRobotsTagPlugin`** is a `beforeSendResponse` plugin on `Magento\Framework\App\Response\Http`. It inspects the request path, status code, and rendered Content-Type, then sets `X-Robots-Tag` once per response.
-5. **`Model\Robots\PolicyResolver`** aggregates `panth_robots_seo/llm_bots/*` toggles + rows from `panth_seo_robots_policy` + the configured `Crawl-delay` + `Sitemap:` references into the final robots.txt body for a given store.
-6. **`Model\Robots\MetaResolver`** computes the per-entity robots meta string — used by the plugin and (when `Panth_AdvancedSEO` is present) by the shared `panth_seo_resolved.robots` cache column.
-7. **`Service\NoindexPathMatcher`** + **`Service\DirectiveValidator`** — the first decides whether a given request path is "private"; the second is the single chokepoint every directive string passes through before it hits a response header or the robots.txt body.
-
----
-
-## Supported LLM Bots
-
-Per-bot allow/disallow lives at **Stores → Configuration → Panth Infotech → Robots & LLM Bots → LLM Bot Policy**. Turning a toggle to **No** emits `User-agent: <bot>\nDisallow: /` in the generated robots.txt; turning it to **Yes** omits the block entirely (equivalent to allow).
-
-| Bot | UA string(s) | Default | Config path |
-|---|---|---|---|
-| **GPTBot** (OpenAI) | `GPTBot` | Yes | `panth_robots_seo/llm_bots/gptbot` |
-| **ChatGPT-User** | `ChatGPT-User` | Yes | `panth_robots_seo/llm_bots/chatgpt_user` |
-| **OAI-SearchBot** | `OAI-SearchBot` | Yes | `panth_robots_seo/llm_bots/oai_searchbot` |
-| **ClaudeBot** (Anthropic) | `ClaudeBot`, `Claude-Web` | Yes | `panth_robots_seo/llm_bots/claudebot` |
-| **Anthropic-AI** | `anthropic-ai` | Yes | `panth_robots_seo/llm_bots/anthropic_ai` |
-| **Google-Extended** | `Google-Extended`, `GoogleOther` | Yes | `panth_robots_seo/llm_bots/google_extended` |
-| **PerplexityBot** | `PerplexityBot` | Yes | `panth_robots_seo/llm_bots/perplexitybot` |
-| **Cohere-AI** | `cohere-ai` | Yes | `panth_robots_seo/llm_bots/cohere_ai` |
-| **CCBot** (Common Crawl) | `CCBot` | **No** | `panth_robots_seo/llm_bots/ccbot` |
-| **Bytespider** (ByteDance) | `Bytespider` | **No** | `panth_robots_seo/llm_bots/bytespider` |
-| **Amazonbot** | `Amazonbot` | Yes | `panth_robots_seo/llm_bots/amazonbot` |
-| **Applebot-Extended** | `Applebot-Extended` | Yes | `panth_robots_seo/llm_bots/applebot_extended` |
-| **FacebookBot** | `FacebookBot` | Yes | `panth_robots_seo/llm_bots/facebookbot` |
-| **Meta-ExternalAgent** | `meta-externalagent` | Yes | `panth_robots_seo/llm_bots/meta_externalagent` |
-
-### Always allowed (no dedicated toggle)
-
-The following bots are not blocked by default and have no dedicated config key. If you need to block them, add a `Disallow: /` row to the Robots Policies grid with the UA as the user-agent:
-
-- **YouBot** — You.com's search crawler
-- **PetalBot** — Huawei / Petal Search crawler
-- **Diffbot** — knowledge-graph crawler
-- **AI2Bot** — Allen Institute research crawler
-- **Omgilibot** — Webz.io crawler
-- **Timpibot** — Timpi decentralised search crawler
-
----
-
 ## Compatibility
 
-| Requirement | Supported |
+| Requirement | Versions Supported |
 |---|---|
 | Magento Open Source | 2.4.4, 2.4.5, 2.4.6, 2.4.7, 2.4.8 |
-| Adobe Commerce | 2.4.4 — 2.4.8 |
-| PHP | 8.1, 8.2, 8.3, 8.4 |
+| Adobe Commerce | 2.4.4, 2.4.5, 2.4.6, 2.4.7, 2.4.8 |
+| Adobe Commerce Cloud | 2.4.4 to 2.4.8 |
+| PHP | 8.1.x, 8.2.x, 8.3.x, 8.4.x |
 | Hyva Theme | 1.0+ (fully compatible) |
 | Luma Theme | Native support |
-| Panth Core | ^1.0 (installed automatically) |
+| Required Dependency | `mage2kishan/module-core` (free) |
 
 ---
 
 ## Installation
+
+### Composer Installation (Recommended)
 
 ```bash
 composer require mage2kishan/module-robots-seo
 bin/magento module:enable Panth_Core Panth_RobotsSeo
 bin/magento setup:upgrade
 bin/magento setup:di:compile
+bin/magento setup:static-content:deploy -f
 bin/magento cache:flush
 ```
 
-### Verify
+### Manual Installation via ZIP
+
+1. Download the latest release from [Packagist](https://packagist.org/packages/mage2kishan/module-robots-seo) or from the [product page](https://kishansavaliya.com/magento-2-robots-seo.html).
+2. Extract it to `app/code/Panth/RobotsSeo/` in your Magento install.
+3. Make sure `Panth_Core` is installed too (required dependency).
+4. Run the commands above starting from `bin/magento module:enable`.
+
+### Verify Installation
 
 ```bash
 bin/magento module:status Panth_RobotsSeo
-# Module is enabled
+# Expected: Module is enabled
 
 curl -s -o /dev/null -w '%{http_code}\n' https://your-store.test/robots.txt
 # 200
@@ -201,170 +229,214 @@ curl -sI https://your-store.test/customer/account/login | grep -i x-robots-tag
 # X-Robots-Tag: noindex, nofollow, max-image-preview:large, max-snippet:-1
 ```
 
-Visit **Admin → Panth Infotech → Robots & LLM Bots → Robots Policies** to see the seeded policy grid.
+After install, open:
+```
+Admin -> Panth Infotech -> Robots & LLM Bots
+```
 
 ---
 
 ## Configuration
 
-Navigate to **Stores → Configuration → Panth Infotech → Robots & LLM Bots**.
+Go to **Stores -> Configuration -> Panth Infotech -> Robots & LLM Bots**.
 
 ### General
 
-| Setting | Path | Default | What it controls |
+| Setting | Group | Default | Description |
 |---|---|---|---|
-| **Enable Module** | `panth_robots_seo/general/enabled` | Yes | Master switch. When No, the `X-Robots-Tag` plugin is a no-op and `/robots.txt` serves a stock `User-agent: *\nAllow: /`. |
-| **Debug Logging** | `panth_robots_seo/general/debug` | No | When Yes, every header and meta decision is written to `var/log/panth_robots_seo.log`. |
-| **Default Meta Robots** | `panth_robots_seo/general/default_directive` | `index,follow` | Baseline directive applied when no per-entity / per-path override fires. Allowed tokens: `index`, `noindex`, `follow`, `nofollow`, `noarchive`, `nosnippet`, `noimageindex`, `max-snippet`, `max-image-preview`, `max-video-preview`, `unavailable_after`, `none`, `all`. |
-| **Noindex Layered-Nav Filtered Pages** | `panth_robots_seo/general/noindex_filtered` | Yes | Emit `noindex, follow` when a catalog listing has layered-nav or sort/limit/page query parameters. |
-| **Noindex Search Result Pages** | `panth_robots_seo/general/noindex_search_results` | Yes | Emit `noindex, follow` on `/catalogsearch/result/*`. |
-| **Noindex URL Paths** | `panth_robots_seo/general/noindex_paths` | (18-line seeded list — see above) | One-path-per-line list of private patterns; `*` matches anything. Matched by `Service\NoindexPathMatcher`. |
-| **max-image-preview Directive** | `panth_robots_seo/general/max_image_preview` | `large` | Appended to every `X-Robots-Tag`. `large` is recommended for Google Discover eligibility. |
-| **max-snippet Directive** | `panth_robots_seo/general/max_snippet` | `-1` | `-1` = unlimited. A positive integer caps SERP snippet length. |
-| **Crawl-delay (seconds)** | `panth_robots_seo/general/crawl_delay` | `0` | Emitted under `User-agent: *` in robots.txt. `0` omits the directive. |
+| Enable Module | General | Yes | Master switch. When No, the X-Robots-Tag plugin is a no-op and `/robots.txt` serves a stock `User-agent: *\nAllow: /`. |
+| Debug Logging | General | No | When Yes, every header and meta decision is written to `var/log/panth_robots_seo.log`. |
+| Default Meta Robots | General | `index,follow` | Baseline directive applied when no per-entity or per-path override fires. |
+| Noindex Layered-Nav Filtered Pages | General | Yes | Emit `noindex, follow` when a catalog listing has layered-nav or sort/limit/page query parameters. |
+| Noindex Search Result Pages | General | Yes | Emit `noindex, follow` on `/catalogsearch/result/*` pages. |
+| Noindex URL Paths (one per line) | General | 18-line seeded list | Private path patterns that must emit `noindex, nofollow`. Wildcards supported: `*` matches anything. |
+| max-image-preview Directive | General | `large` | Appended to every X-Robots-Tag. `large` is recommended for Google Discover eligibility. |
+| max-snippet Directive | General | `-1` | `-1` = unlimited. A positive integer caps the SERP snippet length. |
+| Crawl-delay (seconds) | General | `0` | Emitted under `User-agent: *` in robots.txt. `0` omits the directive. |
 
 ### LLM Bot Policy
 
-| Setting | Path | Default | What it controls |
+| Setting | Group | Default | Description |
 |---|---|---|---|
-| **Allow GPTBot (OpenAI)** | `panth_robots_seo/llm_bots/gptbot` | Yes | No = emits `User-agent: GPTBot\nDisallow: /`. |
-| **Allow ClaudeBot (Anthropic)** | `panth_robots_seo/llm_bots/claudebot` | Yes | Covers both `ClaudeBot` and `Claude-Web`. |
-| **Allow Google-Extended** | `panth_robots_seo/llm_bots/google_extended` | Yes | Covers both `Google-Extended` and `GoogleOther`. |
-| **Allow CCBot (Common Crawl)** | `panth_robots_seo/llm_bots/ccbot` | **No** | CCBot feeds dataset-scale training pipelines; blocked by default. |
-| **Allow PerplexityBot** | `panth_robots_seo/llm_bots/perplexitybot` | Yes | |
-| **Allow Bytespider (ByteDance)** | `panth_robots_seo/llm_bots/bytespider` | **No** | Bytespider ignores partial disallows; blocked by default. |
-| **Allow ChatGPT-User** | `panth_robots_seo/llm_bots/chatgpt_user` | Yes | |
-| **Allow OAI-SearchBot** | `panth_robots_seo/llm_bots/oai_searchbot` | Yes | |
-| **Allow Anthropic-AI** | `panth_robots_seo/llm_bots/anthropic_ai` | Yes | |
-| **Allow Cohere-AI** | `panth_robots_seo/llm_bots/cohere_ai` | Yes | |
-| **Allow Amazonbot** | `panth_robots_seo/llm_bots/amazonbot` | Yes | |
-| **Allow Applebot-Extended** | `panth_robots_seo/llm_bots/applebot_extended` | Yes | |
-| **Allow Facebookbot** | `panth_robots_seo/llm_bots/facebookbot` | Yes | |
-| **Allow Meta-ExternalAgent** | `panth_robots_seo/llm_bots/meta_externalagent` | Yes | |
+| Allow GPTBot (OpenAI) | LLM Bot Policy | Yes | No = emits `User-agent: GPTBot\nDisallow: /`. |
+| Allow ClaudeBot (Anthropic) | LLM Bot Policy | Yes | Covers both `ClaudeBot` and `Claude-Web`. |
+| Allow Google-Extended | LLM Bot Policy | Yes | Covers both `Google-Extended` and `GoogleOther`. |
+| Allow CCBot (Common Crawl) | LLM Bot Policy | No | Blocked by default. CCBot feeds dataset-scale training pipelines. |
+| Allow PerplexityBot | LLM Bot Policy | Yes | |
+| Allow Bytespider (ByteDance) | LLM Bot Policy | No | Blocked by default. Bytespider is known to ignore partial disallows. |
+| Allow ChatGPT-User | LLM Bot Policy | Yes | |
+| Allow OAI-SearchBot | LLM Bot Policy | Yes | |
+| Allow Anthropic-AI | LLM Bot Policy | Yes | |
+| Allow Cohere-AI | LLM Bot Policy | Yes | |
+| Allow Amazonbot | LLM Bot Policy | Yes | |
+| Allow Applebot-Extended | LLM Bot Policy | Yes | |
+| Allow Facebookbot | LLM Bot Policy | Yes | |
+| Allow Meta-ExternalAgent | LLM Bot Policy | Yes | |
 
 ### robots.txt Override
 
-| Setting | Path | Default | What it controls |
+| Setting | Group | Default | Description |
 |---|---|---|---|
-| **Use Custom robots.txt Body** | `panth_robots_seo/robots_txt/override_enabled` | No | When Yes, the custom body below REPLACES the generated output — every LLM toggle and policy row is ignored. |
-| **Custom robots.txt Body** | `panth_robots_seo/robots_txt/custom_body` | (empty) | Pasted verbatim into the response. CRLF is normalised to LF to prevent HTTP header smuggling. Leave empty to use the generated output. |
+| Use Custom robots.txt Body | robots.txt Override | No | When Yes, the custom body REPLACES the generated output. All LLM toggles and policy rows are ignored. |
+| Custom robots.txt Body | robots.txt Override | (empty) | Pasted verbatim into the response. CRLF is normalised to LF. Leave empty to use the generated output. |
 
-Every setting resolves at **store-view** scope, so each store can have a different LLM policy, noindex path list, or override body.
-
----
-
-## Managing Robots Policies
-
-Open **Admin → Panth Infotech → Robots & LLM Bots → Robots Policies** to reach the grid (route `panth_robots_seo/policy/index`).
-
-### Fields
-
-| Field | Description |
-|---|---|
-| **User-agent** | The UA string to match — `*` for the default block, `GPTBot`, `ClaudeBot`, `Applebot-Extended`, a custom crawler, etc. Validated against `/^[A-Za-z0-9._\-+*\/ ]+$/` on save. |
-| **Directive** | `allow` or `disallow`. Single source of truth consumed by `PolicyResolver`. |
-| **Path** | The path fragment the directive applies to. Must start with `/`, no control bytes. `*` wildcards allowed. |
-| **Store View** | `0` applies to all stores; a non-zero value scopes the row to one store view. Foreign-keyed to `store.store_id` with `ON DELETE CASCADE`. |
-| **Priority** | Lower numbers are emitted first within the same user-agent block. |
-| **Active** | Per-row enable/disable. Inactive rows are never rendered. |
-
-### Mass actions
-
-Select rows and choose **Enable**, **Disable** or **Delete** from the grid mass-action menu.
-
-### robots.txt Preview
-
-The **Panth Infotech → Robots & LLM Bots → robots.txt Preview** sub-menu (route `panth_robots_seo/robots/index`) renders the live body for the currently selected store, exactly as the frontend controller would serve it — helpful for dry-running changes before they go public.
+Every setting resolves at store-view scope, so each store can have a different LLM policy, noindex path list, or custom body.
 
 ---
 
-## robots.txt Endpoint
+## Supported LLM Bots
 
-- **URL:** `GET /robots.txt`
-- **Content-Type:** `text/plain; charset=utf-8`
-- **Controller:** `Panth\RobotsSeo\Controller\Robots\Index` at route `seo_robots/robots/index`.
+| Bot | UA string(s) | Default |
+|---|---|---|
+| GPTBot (OpenAI) | `GPTBot` | Allow |
+| ChatGPT-User | `ChatGPT-User` | Allow |
+| OAI-SearchBot | `OAI-SearchBot` | Allow |
+| ClaudeBot (Anthropic) | `ClaudeBot`, `Claude-Web` | Allow |
+| Anthropic-AI | `anthropic-ai` | Allow |
+| Google-Extended | `Google-Extended`, `GoogleOther` | Allow |
+| PerplexityBot | `PerplexityBot` | Allow |
+| Cohere-AI | `cohere-ai` | Allow |
+| CCBot (Common Crawl) | `CCBot` | **Disallow** |
+| Bytespider (ByteDance) | `Bytespider` | **Disallow** |
+| Amazonbot | `Amazonbot` | Allow |
+| Applebot-Extended | `Applebot-Extended` | Allow |
+| FacebookBot | `FacebookBot` | Allow |
+| Meta-ExternalAgent | `meta-externalagent` | Allow |
 
-`/robots.txt` is served by our controller via a `url_rewrite` row installed by `Setup\Patch\Data\InstallRobotsTxtRewrite`. The core `Magento_Robots` router is disabled via `etc/frontend/di.xml` so it never intercepts the request ahead of the url_rewrite layer.
-
-If you are upgrading from `Panth_AdvancedSEO` where `/robots.txt` was already mapped to that module's controller, the `RefreshRobotsTxtRewrite` patch runs on the next `setup:upgrade` and rewrites the stale `target_path` to point at the new controller — zero manual DB surgery required.
-
-### Generated body shape
-
-```
-User-agent: CCBot
-Disallow: /
-
-User-agent: Bytespider
-Disallow: /
-
-User-agent: *
-Crawl-delay: 0
-Disallow: /customer/
-Disallow: /checkout/
-Allow: /
-
-Sitemap: https://your-store.test/sitemap.xml
-Host: your-store.test
-```
+Bots not listed here (YouBot, PetalBot, Diffbot, AI2Bot, etc.) are not blocked by default. To block them, add a `Disallow: /` row in the Robots Policies grid with the UA as the user-agent string.
 
 ---
 
-## X-Robots-Tag Header
+## How It Works
 
-`Plugin\Response\XRobotsTagPlugin` runs `beforeSendResponse` on `Magento\Framework\App\Response\Http` and applies the following order of precedence:
-
-1. **Self-skip on `/robots.txt`** — never sets a header on the robots.txt response itself.
-2. **Error-code override** — 404, 410, 500, 503 → hard `noindex, nofollow`, no further checks.
-3. **Non-HTML asset override** — `.pdf`, `.doc`, `.docx`, `.xls`, `.xlsx` → hard `noindex, nofollow`.
-4. **Catalogsearch noindex** — `/catalogsearch/result/*` when `noindex_search_results = Yes` → `noindex, follow`.
-5. **Configured `noindex_paths` match** — `Service\NoindexPathMatcher` → `noindex, nofollow` (and the matching meta).
-6. **Layered-nav / sort-filter** — when listing page has query parameters → `noindex, follow`.
-7. **Default directive** — `panth_robots_seo/general/default_directive` (e.g. `index, follow`).
-
-In every case the final string is appended with `, max-image-preview:<value>` and `, max-snippet:<int>` from general config, then passed through `Service\DirectiveValidator` before being set on the response.
-
----
-
-## Security
-
-- **ACL + FormKey on every admin controller.** Every Adminhtml controller extends `Panth\RobotsSeo\Controller\Adminhtml\AbstractAction`, declares its own `ADMIN_RESOURCE` constant (`Panth_RobotsSeo::policies`, `Panth_RobotsSeo::preview`), and enforces ACL via `_isAllowed()`. No route is reachable without a valid admin session.
-- **`HttpPostActionInterface` on mutating paths.** `Save`, `Delete`, `MassDelete`, `MassStatus` all implement `HttpPostActionInterface` so GET is rejected at the framework level. Form-key validation runs on every POST.
-- **`DirectiveValidator` whitelist + control-byte rejection.** Every directive string written to `X-Robots-Tag` or the robots.txt body passes through `Service\DirectiveValidator::assertSafe()` — rejects any string containing `\r`, `\n`, `\0`, or bytes outside printable-ASCII. CRLF header injection is structurally impossible.
-- **CRLF normalisation in custom body.** `robots_txt/custom_body` has `\r\n` → `\n` normalisation applied on render so a pasted Windows-style newline can't smuggle a second response header.
-- **Per-store scope on every config value.** `enabled`, `noindex_paths`, every `llm_bots/*` toggle, and the custom body resolve at `ScopeInterface::SCOPE_STORES` — a store-specific value never leaks into another store.
-- **UA + path validation on save.** Admin policy rows reject user-agents outside `/^[A-Za-z0-9._\-+*\/ ]+$/` and paths that do not start with `/` or contain control bytes, before the row is written.
-- **XSS-safe admin preview.** The robots.txt Preview page renders the body through `escapeHtml()` and wraps it in `<pre>` tags, so a hostile custom body can never execute script on an admin browser.
+1. **`Controller\Robots\Index`** serves `GET /robots.txt` with the generated or override body at `Content-Type: text/plain; charset=utf-8`. The core Magento robots router is disabled in `etc/frontend/di.xml` so this controller always wins.
+2. **`Setup\Patch\Data\InstallRobotsTxtRewrite`** writes the `url_rewrite` row that maps `/robots.txt` to the module controller at install time. `RefreshRobotsTxtRewrite` re-points stale rows left behind by `Panth_AdvancedSEO`, so upgrades need no manual DB work.
+3. **`Plugin\Response\XRobotsTagPlugin`** runs `beforeSendResponse` on `Magento\Framework\App\Response\Http`. It reads the request path, HTTP status code, and Content-Type, then sets `X-Robots-Tag` once per response using this precedence order:
+   - Self-skip on `/robots.txt`.
+   - Error-code override (404, 410, 500, 503) to `noindex, nofollow`.
+   - Non-HTML asset override (.pdf, .doc, .xls, .xlsx) to `noindex, nofollow`.
+   - Catalogsearch noindex when `noindex_search_results = Yes`.
+   - Configured `noindex_paths` match via `Service\NoindexPathMatcher`.
+   - Layered-nav or sort-filter parameters to `noindex, follow`.
+   - Default directive from `panth_robots_seo/general/default_directive`.
+4. **`Model\Robots\PolicyResolver`** aggregates LLM-bot toggles, rows from `panth_seo_robots_policy`, the configured crawl-delay, and sitemap references into the final robots.txt body for a given store.
+5. **`Service\DirectiveValidator`** is the single chokepoint every directive string passes through before it reaches a response header or the robots.txt body. It rejects any string containing `\r`, `\n`, `\0`, or bytes outside printable ASCII.
 
 ---
 
-## Troubleshooting
+## FAQ
 
-### `/robots.txt` returns a 404 or a Luma 404 HTML page
+### Does it work on Hyva themes?
 
-You are likely sitting on a stale `url_rewrite` row left behind by `Panth_AdvancedSEO` whose `target_path` still points at the old controller. Run `bin/magento setup:upgrade` — the `RefreshRobotsTxtRewrite` patch fires idempotently and rewrites the row to the new target. Follow with `bin/magento cache:clean config full_page`.
+Yes. The module works at the controller and plugin layer, not through layout or template. Both Hyva and Luma stores get the same robots.txt output and X-Robots-Tag header with no extra configuration.
 
-### `X-Robots-Tag` not appearing on `/customer/*` pages
+### Magento already has a robots.txt textarea in Content -> Design -> Configuration. Why replace it?
 
-Upgrade to **≥ 1.0.2**. Earlier releases had a constructor-argument ordering bug that made the plugin skip the response when `Panth_AdvancedSEO` wasn't installed; 1.0.2 makes the dependency DI-nullable and the plugin always runs.
+Magento's built-in option is a single store-wide textarea with no header control, no LLM bot awareness, and no path-level noindex logic. Panth Robots SEO adds per-store-view generation, 14 AI crawler toggles, a structured policy grid, and the X-Robots-Tag header that Magento does not provide at all.
 
-### LLM bot block missing from `robots.txt`
+### Will it affect my existing robots.txt content?
 
-1. Check the toggle at the **right scope** — `panth_robots_seo/llm_bots/<bot>` resolves at store-view scope, not website or default.
-2. Flush config + FPC: `bin/magento cache:clean config full_page`. The `/robots.txt` body is built live per request but the config it reads from is cached.
-3. Confirm `robots_txt/override_enabled` is **No** — when the override is on, every LLM toggle is ignored.
+When you first install the module, the generated robots.txt starts from your LLM bot toggles and any policy rows you create. If you want to keep your existing content exactly, paste it into the Custom robots.txt Body field and enable the override.
 
-### I turned on `override_enabled` but nothing changes
+### Can I block just one path for a specific bot, not the whole site?
 
-1. `bin/magento cache:clean config full_page` — the override flag and custom body are both pulled from cached config.
-2. Confirm `custom_body` was saved at the **store scope** you are viewing, not the default scope. Check with `SELECT scope, scope_id, value FROM core_config_data WHERE path = 'panth_robots_seo/robots_txt/custom_body';`.
+Yes. Open Admin - Panth Infotech - Robots & LLM Bots - Robots Policies and add a row with the user-agent, `disallow`, and the path you want blocked. You can scope the row to a specific store view and set a priority.
 
-### Meta robots tag not showing in page HTML
+### Does it set the HTML `<meta name="robots">` tag too?
 
-The module sets the `X-Robots-Tag` **HTTP response header** — not the `<meta name="robots">` element. A layout hook that injects the `<meta>` tag into the page `<head>` is only wired when `Panth_AdvancedSEO` is also installed (it owns the `page/main` block override). If you need both, install `mage2kishan/module-advanced-seo` alongside this module; they share the `panth_seo_robots_policy` table and do not collide.
+The module sets the `X-Robots-Tag` HTTP response header on every page, which search engines treat as equivalent to the meta tag. The HTML meta tag is updated too if `Panth_AdvancedSEO` is installed alongside this module. Without AdvancedSEO, only the HTTP header is set.
+
+### Is the noindex path list configurable?
+
+Yes. Go to Stores - Configuration - Panth Infotech - Robots & LLM Bots - General - Noindex URL Paths. Enter one path per line. The `*` wildcard matches anything. The seeded default covers `/customer/*`, `/checkout`, `/wishlist`, `/sales/*`, and about 14 other private patterns.
+
+### What happens on a 404 page?
+
+The X-Robots-Tag plugin hard-overrides to `noindex, nofollow` for HTTP status codes 404, 410, 500, and 503, regardless of any other config. Error pages can never appear in the index.
+
+### Does it need Panth_AdvancedSEO?
+
+No. The module is fully standalone. If AdvancedSEO is also installed, they share the `panth_seo_robots_policy` table and do not conflict with each other.
+
+### Is it multi-store safe?
+
+Yes. Every config value, every policy row, and every X-Robots-Tag decision resolves at store-view scope. A setting on one store view never affects another.
 
 ---
 
 ## Support
 
-- **Agency:** [Panth Infotech on Upwork](https://www.upwork.com/agencies/1881421506131960778/)
-- **Direct:** [kishansavaliya.com](https://kishansavaliya.com) — [Get a free quote](https://kishansavaliya.com/get-quote)
+| Channel | Contact |
+|---|---|
+| Product Page | [kishansavaliya.com/magento-2-robots-seo.html](https://kishansavaliya.com/magento-2-robots-seo.html) |
+| Email | kishansavaliyakb@gmail.com |
+| Website | [kishansavaliya.com](https://kishansavaliya.com) |
+| WhatsApp | +91 84012 70422 |
+| GitHub Issues | [github.com/mage2sk/module-robots-seo/issues](https://github.com/mage2sk/module-robots-seo/issues) |
+| Upwork (Top Rated Plus) | [Hire Kishan Savaliya](https://www.upwork.com/freelancers/~016dd1767321100e21) |
+| Upwork Agency | [Panth Infotech](https://www.upwork.com/agencies/1881421506131960778/) |
+
+Response time: 1-2 business days.
+
+### Need Custom Magento Development?
+
+Looking for **custom Magento module development**, **Hyva theme work**, **store migrations**, or **performance tuning**? Get a free quote in 24 hours:
+
+<p align="center">
+  <a href="https://kishansavaliya.com/get-quote">
+    <img src="https://img.shields.io/badge/%F0%9F%92%AC%20Get%20a%20Free%20Quote-kishansavaliya.com%2Fget--quote-DC2626?style=for-the-badge" alt="Get a Free Quote" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://www.upwork.com/freelancers/~016dd1767321100e21">
+    <img src="https://img.shields.io/badge/Hire%20Kishan-Top%20Rated%20Plus-14a800?style=for-the-badge&logo=upwork&logoColor=white" alt="Hire on Upwork" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://www.upwork.com/agencies/1881421506131960778/">
+    <img src="https://img.shields.io/badge/Visit-Panth%20Infotech%20Agency-14a800?style=for-the-badge&logo=upwork&logoColor=white" alt="Visit Agency" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://kishansavaliya.com/magento-2-robots-seo.html">
+    <img src="https://img.shields.io/badge/View%20Product%20Page-magento--2--robots--seo-0D9488?style=for-the-badge" alt="View Product Page" />
+  </a>
+</p>
+
+---
+
+## About Panth Infotech
+
+Built and maintained by **Kishan Savaliya** ([kishansavaliya.com](https://kishansavaliya.com)), a **Top Rated Plus** Magento developer on Upwork with 10+ years of eCommerce experience.
+
+**Panth Infotech** is a Magento 2 development agency that builds high quality, security focused extensions and themes for both Hyva and Luma storefronts. The extension suite covers SEO, performance, checkout, product presentation, customer engagement, and store management, with each module built to MEQP standards and tested across Magento 2.4.4 to 2.4.8.
+
+Browse the full extension catalog on our [Magento extensions page](https://kishansavaliya.com/magento-extensions.html) or on [Packagist](https://packagist.org/packages/mage2kishan/).
+
+---
+
+## Quick Links
+
+| Resource | Link |
+|---|---|
+| **Product Page** | [magento-2-robots-seo.html](https://kishansavaliya.com/magento-2-robots-seo.html) |
+| **Packagist** | [mage2kishan/module-robots-seo](https://packagist.org/packages/mage2kishan/module-robots-seo) |
+| **GitHub** | [mage2sk/module-robots-seo](https://github.com/mage2sk/module-robots-seo) |
+| **Website** | [kishansavaliya.com](https://kishansavaliya.com) |
+| **Free Quote** | [kishansavaliya.com/get-quote](https://kishansavaliya.com/get-quote) |
+| **Upwork (Top Rated Plus)** | [Hire Kishan Savaliya](https://www.upwork.com/freelancers/~016dd1767321100e21) |
+| **Upwork Agency** | [Panth Infotech](https://www.upwork.com/agencies/1881421506131960778/) |
+| **Email** | kishansavaliyakb@gmail.com |
+| **WhatsApp** | +91 84012 70422 |
+
+---
+
+<p align="center">
+  <strong>Ready to take control of how bots and crawlers see your store?</strong><br/>
+  <a href="https://kishansavaliya.com/magento-2-robots-seo.html">
+    <img src="https://img.shields.io/badge/%F0%9F%9A%80%20See%20Robots%20SEO%20%E2%86%92-Product%20Page%20%26%20Details-DC2626?style=for-the-badge" alt="See Robots SEO" />
+  </a>
+</p>
+
+---
+
+**SEO Keywords:** magento 2 robots.txt, magento 2 robots seo, magento 2 x-robots-tag, magento 2 llm bot policy, magento 2 ai crawler control, magento 2 block gptbot, magento 2 block claudebot, magento 2 block perplexitybot, magento 2 block bytespider, magento 2 google-extended, magento 2 noindex, magento 2 noindex layered nav, magento 2 noindex search results, magento 2 crawl delay, magento 2 robots meta, magento 2 seo headers, hyva robots seo, luma robots seo, magento 2 robots extension, magento 2 robots module, mage2kishan robots seo, panth robots seo, panth infotech, hire magento developer, top rated plus upwork, kishan savaliya magento, custom magento development, magento 2.4.8 robots, php 8.4 magento seo
