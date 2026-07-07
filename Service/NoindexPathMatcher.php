@@ -5,21 +5,8 @@ namespace Panth\RobotsSeo\Service;
 
 use Panth\RobotsSeo\Helper\Config;
 
-/**
- * Matches request paths against the configured noindex pattern list so
- * private / customer-scoped pages never emit an indexable robots directive.
- *
- * Patterns are newline-separated path expressions. Leading slash is optional;
- * `*` is a wildcard (zero or more characters); blank lines and lines starting
- * with `#` are ignored.
- *
- * Ported from Panth_AdvancedSEO — unchanged semantics, new namespace.
- */
 class NoindexPathMatcher
 {
-    /**
-     * Fallback default pattern list used when the admin field is blank.
-     */
     public const DEFAULT_PATTERNS = [
         '/customer/*',
         '/checkout',
@@ -48,11 +35,6 @@ class NoindexPathMatcher
         '/connect/*',
     ];
 
-    /**
-     * Cached compiled regex, keyed by store id.
-     *
-     * @var array<int,string>
-     */
     private array $compiled = [];
 
     public function __construct(
@@ -60,10 +42,6 @@ class NoindexPathMatcher
     ) {
     }
 
-    /**
-     * Return true when the given request path matches any of the configured
-     * noindex patterns.
-     */
     public function isNoindexPath(string $path, ?int $storeId = null): bool
     {
         $normalized = $this->normalizePath($path);
@@ -77,9 +55,6 @@ class NoindexPathMatcher
         return (bool) preg_match($regex, $normalized);
     }
 
-    /**
-     * @return string[]
-     */
     public function getPatterns(?int $storeId = null): array
     {
         $raw = trim($this->config->getNoindexPaths($storeId));

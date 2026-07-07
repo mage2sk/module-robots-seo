@@ -5,10 +5,6 @@ namespace Panth\RobotsSeo\Block\Adminhtml\Policy\Edit;
 
 use Magento\Backend\Block\Widget\Context;
 
-/**
- * Shared helpers for the admin form button providers — resolve the
- * editing policy_id and build URLs that stay within our admin namespace.
- */
 abstract class GenericButton
 {
     public function __construct(

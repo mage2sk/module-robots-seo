@@ -9,29 +9,8 @@ use Panth\RobotsSeo\Api\RobotsPolicyInterface;
 use Panth\RobotsSeo\Helper\Config;
 use Panth\RobotsSeo\Service\DirectiveValidator;
 
-/**
- * Aggregates per-store `panth_seo_robots_policy` rows + LLM bot toggles from
- * system.xml + a Sitemap: line into a single robots.txt body.
- *
- * Also satisfies the meta / X-Robots-Tag resolvers by delegating to
- * `MetaResolver` so that external callers that only know about
- * RobotsPolicyInterface get a consistent answer.
- *
- * SECURITY: every row coming out of the DB is re-validated before it is
- * echoed into the robots.txt body. Even though `Controller\Adminhtml\Policy\Save`
- * rejects malformed input at save-time, a defence-in-depth validation here
- * protects against tampering via direct SQL or a broken migration.
- */
 class PolicyResolver implements RobotsPolicyInterface
 {
-    /**
-     * Known LLM crawler user agents mapped to the system.xml field id that
-     * governs their allow/disallow flag. The key is the exact `User-agent:`
-     * string that appears in robots.txt; the value is the snake_case field id
-     * declared under `panth_robots_seo/llm_bots/*` in system.xml / config.xml.
-     *
-     * @var array<string,?string>
-     */
     public const LLM_BOT_CONFIG_MAP = [
         'GPTBot'             => 'gptbot',
         'ChatGPT-User'       => 'chatgpt_user',
@@ -57,12 +36,6 @@ class PolicyResolver implements RobotsPolicyInterface
         'Timpibot'           => null,
     ];
 
-    /**
-     * Flat list of the UA strings above — kept for callers that need a plain
-     * array rather than the config map.
-     *
-     * @var string[]
-     */
     public const LLM_BOTS = [
         'GPTBot', 'ChatGPT-User', 'OAI-SearchBot', 'ClaudeBot', 'Claude-Web',
         'anthropic-ai', 'Google-Extended', 'GoogleOther', 'CCBot',
@@ -92,11 +65,6 @@ class PolicyResolver implements RobotsPolicyInterface
 
     public function getRobotsTxt(int $storeId): string
     {
-        // Admin-provided override short-circuits everything. Even though
-        // we trust the admin user to not paste malicious content here, we
-        // still strip CR/LF injection attempts into the header area by
-        // normalising line endings. The body is still served as
-        // `text/plain` so XSS is not relevant.
         if ($this->config->isRobotsTxtOverrideEnabled($storeId)) {
             $custom = $this->config->getCustomRobotsTxt($storeId);
             return $this->normalizeBody($custom);
@@ -107,7 +75,6 @@ class PolicyResolver implements RobotsPolicyInterface
         $lines[] = '# ' . gmdate('Y-m-d H:i:s') . ' UTC';
         $lines[] = '';
 
-        // LLM bot policy first — explicit Allow/Disallow per UA block.
         foreach ($this->getLlmBotPolicy($storeId) as $ua => $allowed) {
             if (!$this->validator->isValidUserAgent($ua)) {
                 continue;
@@ -117,14 +84,12 @@ class PolicyResolver implements RobotsPolicyInterface
             $lines[] = '';
         }
 
-        // Default User-agent: * block from panth_seo_robots_policy rows.
         $rows = $this->loadPolicyRows($storeId);
         $groups = [];
         foreach ($rows as $row) {
             $ua = (string) ($row['user_agent'] ?? '');
             $ua = $ua !== '' ? $ua : '*';
-            // Hard reject any row that fails the UA whitelist. This protects
-            // against tampered DB rows containing CRLF or other injection.
+
             if ($ua !== '*' && !$this->validator->isValidUserAgent($ua)) {
                 continue;
             }
@@ -135,7 +100,6 @@ class PolicyResolver implements RobotsPolicyInterface
         }
 
         foreach ($groups as $ua => $entries) {
-            // LLM bots already emitted above.
             if (in_array($ua, self::LLM_BOTS, true)) {
                 continue;
             }
@@ -165,7 +129,6 @@ class PolicyResolver implements RobotsPolicyInterface
             $lines[] = '';
         }
 
-        // Sitemap references for every store view sharing the host.
         try {
             $host = $this->getStoreHost($storeId);
             $store = $this->storeManager->getStore($storeId);
@@ -176,7 +139,6 @@ class PolicyResolver implements RobotsPolicyInterface
                 $lines[] = 'Host: ' . $host;
             }
         } catch (\Throwable) {
-            // Sitemap references are optional.
         }
 
         return implode("\n", $lines) . "\n";
@@ -187,8 +149,6 @@ class PolicyResolver implements RobotsPolicyInterface
         $out = [];
         foreach (self::LLM_BOT_CONFIG_MAP as $ua => $configKey) {
             if ($configKey === null) {
-                // No dedicated toggle — default to allow so we do not silently
-                // block bots a merchant never configured.
                 $out[$ua] = true;
                 continue;
             }
@@ -197,9 +157,6 @@ class PolicyResolver implements RobotsPolicyInterface
         return $out;
     }
 
-    /**
-     * @return array<int,array<string,mixed>>
-     */
     private function loadPolicyRows(int $storeId): array
     {
         $connection = $this->resource->getConnection();
@@ -215,9 +172,6 @@ class PolicyResolver implements RobotsPolicyInterface
         return $connection->fetchAll($select);
     }
 
-    /**
-     * @return string[]
-     */
     private function getDefaultDisallows(): array
     {
         return [
@@ -254,11 +208,6 @@ class PolicyResolver implements RobotsPolicyInterface
         }
     }
 
-    /**
-     * Normalise CRLF to LF and strip NUL bytes from admin-entered body. Leaves
-     * the rest of the content untouched so the merchant can use any legal
-     * robots.txt directive.
-     */
     private function normalizeBody(string $body): string
     {
         $body = str_replace(["\0", "\r\n", "\r"], ['', "\n", "\n"], $body);

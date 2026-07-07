@@ -6,16 +6,8 @@ namespace Panth\RobotsSeo\Setup\Patch\Data;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 
-/**
- * Seeds `panth_seo_robots_policy` with sensible defaults only if the table is
- * empty AT STORE 0. This means:
- *  - Fresh install of Panth_RobotsSeo alone → table is created + seeded.
- *  - Coexistence with Panth_AdvancedSEO that already seeded the same table
- *    → existing rows short-circuit the patch and no duplicates are inserted.
- */
 class InstallDefaultRobotsPolicy implements DataPatchInterface
 {
-    /** @var string[] */
     private const DEFAULT_DISALLOW_PATHS = [
         '/checkout/',
         '/customer/',
@@ -26,7 +18,6 @@ class InstallDefaultRobotsPolicy implements DataPatchInterface
         '/wishlist/',
     ];
 
-    /** @var string[] */
     private const LLM_BOTS = [
         'GPTBot',
         'ClaudeBot',

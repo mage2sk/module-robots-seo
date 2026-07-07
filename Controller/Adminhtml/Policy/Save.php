@@ -11,16 +11,6 @@ use Panth\RobotsSeo\Model\ResourceModel\RobotsPolicy as PolicyResource;
 use Panth\RobotsSeo\Model\Robots\Policy as PolicyModel;
 use Panth\RobotsSeo\Service\DirectiveValidator;
 
-/**
- * Save a robots policy row. Every input field is re-validated server-side:
- * - `user_agent` must match the printable-ASCII whitelist (no CRLF, no `;`).
- * - `directive` must be `allow` or `disallow`.
- * - `path` must start with `/` and contain no control bytes.
- * - `store_id`, `priority`, `is_active` are cast to int.
- *
- * FormKey + ACL are enforced by the framework (`HttpPostActionInterface`
- * triggers automatic `form_key` verification in the backend action flow).
- */
 class Save extends AbstractAction implements HttpPostActionInterface
 {
     public const ADMIN_RESOURCE = 'Panth_RobotsSeo::policies_save';
@@ -40,9 +30,6 @@ class Save extends AbstractAction implements HttpPostActionInterface
         $request = $this->getRequest();
 
         try {
-            // ui_component forms submit with `dataScope=data` so fields land
-            // as request params AND as `data[<field>]` via getPostValue().
-            // Merge both so the controller works regardless of submit mode.
             $post = (array) $request->getPostValue();
             $nested = (array) ($post['data'] ?? []);
             $get = static fn(string $k, $d) => $nested[$k] ?? $post[$k] ?? $request->getParam($k, $d);

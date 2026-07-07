@@ -8,9 +8,6 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-/**
- * Renders a per-row Actions dropdown (Edit / Delete) on the policy grid.
- */
 class PolicyActions extends Column
 {
     public const URL_EDIT   = 'panth_robots_seo/policy/edit';

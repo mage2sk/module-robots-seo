@@ -7,10 +7,6 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 use Panth\RobotsSeo\Controller\Adminhtml\AbstractAction;
 
-/**
- * Admin grid page for `panth_seo_robots_policy` — lists user-agent /
- * path / directive rows.
- */
 class Index extends AbstractAction
 {
     public const ADMIN_RESOURCE = 'Panth_RobotsSeo::policies';

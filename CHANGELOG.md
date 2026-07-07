@@ -4,6 +4,11 @@ All notable changes to Panth_RobotsSeo will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and the project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.0.9]
+
+### Changed
+- Code cleanup: removed redundant inline comments and docblocks from the PHP source. No functional changes.
+
 ## [1.0.8] - 2026-06-18
 
 ### Changed

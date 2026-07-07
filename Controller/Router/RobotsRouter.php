@@ -9,15 +9,6 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Router\ActionList;
 use Magento\Framework\App\RouterInterface;
 
-/**
- * Replaces Magento\Robots\Controller\Router via DI <preference>.
- *
- * Same trigger ("robots.txt" pathInfo), but dispatches to Panth_RobotsSeo's
- * Robots/Index controller instead of Magento_Robots' Index/Index. This
- * avoids the previous "disable native router + url_rewrite" approach,
- * which silently lost on stores where the disable override didn't merge
- * or where the Base router caught .txt paths first.
- */
 class RobotsRouter implements RouterInterface
 {
     public function __construct(

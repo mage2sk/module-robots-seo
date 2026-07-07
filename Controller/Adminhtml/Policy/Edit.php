@@ -10,11 +10,6 @@ use Panth\RobotsSeo\Controller\Adminhtml\AbstractAction;
 use Panth\RobotsSeo\Model\Robots\Policy as PolicyModel;
 use Panth\RobotsSeo\Model\ResourceModel\RobotsPolicy as PolicyResource;
 
-/**
- * Edit form for a single `panth_seo_robots_policy` row. The row id is
- * explicitly cast to int on read so crafted query strings cannot confuse
- * `ResourceModel::load()` with non-numeric values.
- */
 class Edit extends AbstractAction
 {
     public const ADMIN_RESOURCE = 'Panth_RobotsSeo::policies';

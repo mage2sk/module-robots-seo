@@ -7,15 +7,6 @@ use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-/**
- * Installs one `url_rewrite` row per store view so `/robots.txt` resolves to
- * our frontend controller (`seo_robots/robots/index`). Inserts are idempotent:
- * the same row is skipped on rerun by the composite unique key on
- * (store_id, request_path).
- *
- * The Magento_Robots core router is disabled in `etc/frontend/di.xml` so the
- * URL rewrite row installed here actually wins the route resolution.
- */
 class InstallRobotsTxtRewrite implements DataPatchInterface
 {
     private const REQUEST_PATH = 'robots.txt';

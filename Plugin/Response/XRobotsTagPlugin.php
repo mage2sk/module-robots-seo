@@ -15,26 +15,10 @@ use Panth\RobotsSeo\Service\DirectiveValidator;
 use Panth\RobotsSeo\Service\NoindexPathMatcher;
 use Psr\Log\LoggerInterface;
 
-/**
- * Adds the X-Robots-Tag HTTP header on frontend responses.
- *
- * Reinforces the HTML `<meta name="robots">` directive at the HTTP level.
- * For non-HTML assets (PDFs, images served through Magento controllers),
- * the header is emitted based on a URL pattern check so search engines
- * receive consistent robots directives regardless of content type.
- *
- * SECURITY DEFENCES applied in this order:
- *  - `getAreaCode() === frontend` gate — prevents leakage of admin responses.
- *  - Every directive value is run through DirectiveValidator BEFORE the
- *    header is set, so a tampered DB row containing CRLF or bogus tokens
- *    can never reach `setHeader()`.
- */
 class XRobotsTagPlugin
 {
-    /** @var string[] URL extensions that should carry noindex by default */
     private const NOINDEX_EXTENSIONS = ['pdf', 'doc', 'docx', 'xls', 'xlsx'];
 
-    /** @var int[] HTTP status codes that must never be indexed */
     private const NOINDEX_STATUS_CODES = [404, 410, 500, 503];
 
     public function __construct(
@@ -50,9 +34,6 @@ class XRobotsTagPlugin
     ) {
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
     public function beforeSendResponse(HttpResponse $subject): void
     {
         try {
@@ -68,41 +49,31 @@ class XRobotsTagPlugin
 
             $requestUri = (string) $this->request->getRequestUri();
 
-            // The /robots.txt response is served by our own controller which
-            // already sets X-Robots-Tag: noindex. Do not overwrite it.
             $requestPath = (string) (parse_url($requestUri, PHP_URL_PATH) ?? '');
             if ($requestPath === '/robots.txt') {
                 return;
             }
 
-            // Error responses (404/410/5xx) must never be indexed, regardless of
-            // any other configuration. The HTTP header takes precedence over
-            // `<meta name="robots">` per Google docs.
             if (in_array((int) $subject->getStatusCode(), self::NOINDEX_STATUS_CODES, true)) {
                 $this->setHeaderSafely($subject, 'noindex, nofollow');
                 return;
             }
 
-            // Non-HTML document responses (.pdf, .doc, ...) should not be
-            // indexed by default.
             if ($this->isNoindexAssetUrl($requestUri)) {
                 $this->setHeaderSafely($subject, 'noindex, nofollow');
                 return;
             }
 
-            // Search results: noindex,follow so crawlers still traverse links.
             if ($this->isSearchResultPath($requestUri) && $this->config->isNoindexSearchResults($storeId)) {
                 $this->setHeaderSafely($subject, 'noindex, follow');
                 return;
             }
 
-            // Private / customer-scoped paths — always noindex,nofollow.
             if ($this->noindexPathMatcher->isNoindexPath($requestUri, $storeId)) {
                 $this->setHeaderSafely($subject, 'noindex, nofollow');
                 return;
             }
 
-            // Default HTML response branch.
             $robots = $this->robotsPolicy->getHeaderRobots('', 0, $storeId);
             $robots = $this->robotsMetaResolver->appendAdvancedDirectives($robots, $storeId);
             if ($robots === '') {
@@ -114,27 +85,15 @@ class XRobotsTagPlugin
         }
     }
 
-    /**
-     * Validate the directive value and only then forward it to setHeader().
-     * If validation fails the default `index, follow` is used so the header
-     * is always present but never malicious.
-     */
     private function setHeaderSafely(HttpResponse $subject, string $directive): void
     {
         $safe = $this->validator->sanitizeDirective($directive);
-        // Final belt-and-braces check: if the directive still contains any
-        // control byte, fall back to the hard default. Should be impossible
-        // after sanitizeDirective() but keeps the header free of CR/LF under
-        // any circumstances.
+
         if (preg_match('/[\x00-\x1F\x7F]/', $safe)) {
             $safe = DirectiveValidator::DEFAULT_DIRECTIVE;
         }
         $subject->setHeader('X-Robots-Tag', $safe, true);
 
-        // Debug logging — only emits when the merchant has flipped
-        // `panth_robots_seo/general/debug` on. Routes through the dedicated
-        // `Panth\RobotsSeo\Logger\Logger` virtualType so the line lands in
-        // `var/log/panth_robots_seo.log` rather than the generic system log.
         try {
             $storeId = (int) $this->storeManager->getStore()->getId();
             if ($this->config->isDebug($storeId)) {
@@ -146,7 +105,6 @@ class XRobotsTagPlugin
                 ));
             }
         } catch (\Throwable) {
-            // Never let debug logging break the response.
         }
     }
 

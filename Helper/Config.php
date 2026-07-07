@@ -6,14 +6,8 @@ namespace Panth\RobotsSeo\Helper;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Single entry point for every robots-related system.xml value. Anything that
- * comes out of this helper is strictly typed and normalised so callers never
- * have to re-validate raw `ScopeConfig` values.
- */
 class Config
 {
-    /** Root section for all robots-related system config. */
     public const XML_SECTION = 'panth_robots_seo';
 
     public const XML_GENERAL_ENABLED              = self::XML_SECTION . '/general/enabled';
@@ -67,9 +61,6 @@ class Config
         return (string) ($this->value(self::XML_GENERAL_NOINDEX_PATHS, $storeId) ?? '');
     }
 
-    /**
-     * max-image-preview directive value: "none", "standard", or "large".
-     */
     public function getMaxImagePreview(?int $storeId = null): string
     {
         $value = (string) ($this->value(self::XML_GENERAL_MAX_IMAGE_PREVIEW, $storeId) ?? 'large');
@@ -77,17 +68,11 @@ class Config
         return in_array($value, $allowed, true) ? $value : 'large';
     }
 
-    /**
-     * max-snippet directive value: -1 (unlimited) or a positive character count.
-     */
     public function getMaxSnippet(?int $storeId = null): int
     {
         return (int) ($this->value(self::XML_GENERAL_MAX_SNIPPET, $storeId) ?? -1);
     }
 
-    /**
-     * Crawl-delay directive for robots.txt (seconds). 0 means omit the directive.
-     */
     public function getCrawlDelay(?int $storeId = null): int
     {
         return max(0, (int) ($this->value(self::XML_GENERAL_CRAWL_DELAY, $storeId) ?? 0));
@@ -95,8 +80,6 @@ class Config
 
     public function isLlmBotAllowed(string $bot, ?int $storeId = null): bool
     {
-        // `$bot` comes from a hard-coded whitelist in PolicyResolver::LLM_BOT_CONFIG_MAP
-        // (not from user input) so direct concatenation is safe here.
         return $this->flag(self::XML_LLM_BOT_PREFIX . $bot, $storeId);
     }
 

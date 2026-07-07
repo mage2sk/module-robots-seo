@@ -6,10 +6,6 @@ namespace Panth\RobotsSeo\Ui\Component\Form\DataProvider;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Panth\RobotsSeo\Model\ResourceModel\RobotsPolicy\CollectionFactory;
 
-/**
- * Supplies the robots-policy edit form with existing row data (edit mode)
- * or sensible defaults (new mode).
- */
 class PolicyFormDataProvider extends AbstractDataProvider
 {
     private ?array $loadedData = null;

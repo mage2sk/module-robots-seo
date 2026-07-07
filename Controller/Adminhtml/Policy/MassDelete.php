@@ -9,10 +9,6 @@ use Magento\Ui\Component\MassAction\Filter;
 use Panth\RobotsSeo\Controller\Adminhtml\AbstractAction;
 use Panth\RobotsSeo\Model\ResourceModel\RobotsPolicy\CollectionFactory;
 
-/**
- * Mass-delete selected robots policy rows from the admin grid. POST-only +
- * FormKey enforced via HttpPostActionInterface.
- */
 class MassDelete extends AbstractAction implements HttpPostActionInterface
 {
     public const ADMIN_RESOURCE = 'Panth_RobotsSeo::policies_save';

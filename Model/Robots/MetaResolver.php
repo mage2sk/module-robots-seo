@@ -10,24 +10,6 @@ use Magento\Store\Model\ScopeInterface;
 use Panth\RobotsSeo\Helper\Config;
 use Panth\RobotsSeo\Service\DirectiveValidator;
 
-/**
- * Computes the page-level `<meta name="robots">` value.
- *
- * Resolution order (first non-empty WINS):
- *
- *  1) URL pattern policy: filtered layered nav, search results, pagination
- *     (these must beat stored per-entity values so the admin toggles are
- *     never dead switches).
- *  2) `panth_seo_resolved.robots` — populated by the indexer in Panth_AdvancedSEO
- *     when that module is also installed. Reading it here is a soft
- *     cross-module dependency: if AdvancedSEO is absent the table simply
- *     does not exist and the code falls through to step 3.
- *  3) `panth_robots_seo/general/default_directive` system config.
- *
- * Every value that eventually lands in the response goes through the
- * DirectiveValidator whitelist so admin-tampered rows can never inject
- * CRLF or bogus tokens into the header.
- */
 class MetaResolver
 {
     public function __construct(
@@ -39,9 +21,6 @@ class MetaResolver
     ) {
     }
 
-    /**
-     * Base `<meta name="robots">` value (no max-image-preview / max-snippet).
-     */
     public function resolve(string $entityType, int $entityId, int $storeId): string
     {
         if ($this->isNoindexByUrlPattern($storeId)) {
@@ -56,11 +35,6 @@ class MetaResolver
         return $this->validator->sanitizeDirective($this->config->getDefaultDirective($storeId));
     }
 
-    /**
-     * Append Google-specific robots directives (max-image-preview, max-snippet)
-     * to the base robots value when configured. Each directive is still
-     * validated via DirectiveValidator so the final string is always safe.
-     */
     public function appendAdvancedDirectives(string $baseRobots, int $storeId): string
     {
         $directives = [];
@@ -81,20 +55,11 @@ class MetaResolver
         return $this->validator->sanitizeDirective($candidate);
     }
 
-    /**
-     * Resolve robots value WITH max-* advanced directives appended.
-     */
     public function resolveWithDirectives(string $entityType, int $entityId, int $storeId): string
     {
         return $this->appendAdvancedDirectives($this->resolve($entityType, $entityId, $storeId), $storeId);
     }
 
-    /**
-     * Fetch the stored `panth_seo_resolved.robots` value when the indexer
-     * table exists. Gracefully returns `''` when the table is absent — that
-     * is the expected case when Panth_AdvancedSEO is NOT installed, in
-     * which case the resolver falls back to the module default.
-     */
     private function fetchStored(string $entityType, int $entityId, int $storeId): string
     {
         if ($entityId <= 0) {
@@ -120,12 +85,6 @@ class MetaResolver
 
     private function isNoindexByUrlPattern(int $storeId): bool
     {
-        // Read filter codes from $_GET only, never from $request->getParams().
-        // FilterRouter::match() (Panth_FilterSeo) does setParam() for filter
-        // attribute codes on pretty URLs — those router-set params look
-        // identical to user $_GET filters via getParams(), which would cause
-        // every pretty filter URL (the canonical SEO surface) to be flagged
-        // noindex,follow.
         $query = $this->request->getQuery()->toArray();
 
         if ($query !== [] && $this->config->isEnabled($storeId) && $this->hasFilterParams($query)
@@ -142,9 +101,6 @@ class MetaResolver
         return false;
     }
 
-    /**
-     * @param array<string,mixed> $params
-     */
     private function hasFilterParams(array $params): bool
     {
         $filterKeys = ['product_list_order', 'product_list_dir', 'product_list_limit', 'product_list_mode'];
