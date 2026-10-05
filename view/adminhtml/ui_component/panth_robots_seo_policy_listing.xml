@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO - Robots Policies grid.
+ *
+ * Data source: `panth_robots_seo_policy_listing_data_source` is registered in
+ * etc/di.xml and points at Model\ResourceModel\RobotsPolicy\Grid\Collection.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">panth_robots_seo_policy_listing.panth_robots_seo_policy_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New Policy</label>
+            </button>
+        </buttons>
+        <spinner>panth_robots_seo_policy_columns</spinner>
+        <deps>
+            <dep>panth_robots_seo_policy_listing.panth_robots_seo_policy_listing_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="panth_robots_seo_policy_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">policy_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Panth_RobotsSeo::policies</aclResource>
+        <dataProvider name="panth_robots_seo_policy_listing_data_source"
+                      class="Panth\RobotsSeo\Ui\PolicyGridDataProvider">
+            <settings>
+                <requestFieldName>policy_id</requestFieldName>
+                <primaryFieldName>policy_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <url path="panth_robots_seo/policy/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                    <confirm>
+                        <title translate="true">Delete selected policies</title>
+                        <message translate="true">Are you sure you want to delete the selected rows?</message>
+                    </confirm>
+                </settings>
+            </action>
+            <action name="enable">
+                <settings>
+                    <url path="panth_robots_seo/policy/massStatus/status/1"/>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <url path="panth_robots_seo/policy/massStatus/status/0"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="panth_robots_seo_policy_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>policy_id</indexField>
+            </settings>
+        </selectionsColumn>
+
+        <column name="policy_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+
+        <column name="store_id" sortOrder="20"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Panth\RobotsSeo\Model\Config\Source\StoreOptions"/>
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <label translate="true">Store View</label>
+            </settings>
+        </column>
+
+        <column name="user_agent" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">User-agent</label>
+            </settings>
+        </column>
+
+        <column name="directive" sortOrder="40"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Panth\RobotsSeo\Model\Config\Source\DirectiveAction"/>
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <label translate="true">Directive</label>
+            </settings>
+        </column>
+
+        <column name="path" sortOrder="50">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Path</label>
+            </settings>
+        </column>
+
+        <column name="priority" sortOrder="60">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Priority</label>
+            </settings>
+        </column>
+
+        <column name="is_active" sortOrder="70"
+                component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <label translate="true">Active</label>
+            </settings>
+        </column>
+
+        <column name="updated_at" sortOrder="80" class="Magento\Ui\Component\Listing\Columns\Date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Updated</label>
+            </settings>
+        </column>
+
+        <actionsColumn name="actions" class="Panth\RobotsSeo\Ui\Component\Listing\Column\PolicyActions" sortOrder="90">
+            <settings>
+                <indexField>policy_id</indexField>
+                <label translate="true">Action</label>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

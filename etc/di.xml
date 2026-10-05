@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Robots SEO - Global DI wiring.
+ *
+ * Shared between admin + frontend:
+ *   - Bind RobotsPolicyInterface to PolicyResolver.
+ *   - Register the grid data source for the Robots Policies UI component.
+ *   - Wire the Grid\Collection with its main table and resource model
+ *     (per the repo grid-collection rules: REAL class, never virtualType,
+ *     five matching PK locations all aligned on `policy_id`).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Panth\RobotsSeo\Api\RobotsPolicyInterface"
+                type="Panth\RobotsSeo\Model\Robots\PolicyResolver"/>
+
+    <!-- Dedicated log channel written to var/log/panth_robots_seo.log. The
+         XRobotsTagPlugin queries Config::isDebug() and only pushes a record
+         when the merchant has explicitly enabled debug logging, so the file
+         stays quiet in production. -->
+    <virtualType name="Panth\RobotsSeo\Logger\Handler"
+                 type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/panth_robots_seo.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Panth\RobotsSeo\Logger\Logger" type="Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">panth_robots_seo</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Panth\RobotsSeo\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Panth\RobotsSeo\Controller\Robots\Index">
+        <arguments>
+            <argument name="pageFactory" xsi:type="object">robotsResultPageFactory</argument>
+        </arguments>
+    </type>
+    <type name="Panth\RobotsSeo\Plugin\Response\XRobotsTagPlugin">
+        <arguments>
+            <argument name="logger" xsi:type="object">Panth\RobotsSeo\Logger\Logger</argument>
+        </arguments>
+    </type>
+
+    <!-- Robots Policies grid collection: real class, not a virtualType.
+         mainTable + resourceModel injected explicitly per the repo's grid
+         collection rules. -->
+    <type name="Panth\RobotsSeo\Model\ResourceModel\RobotsPolicy\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">panth_seo_robots_policy</argument>
+            <argument name="resourceModel" xsi:type="string">Panth\RobotsSeo\Model\ResourceModel\RobotsPolicy</argument>
+        </arguments>
+    </type>
+
+    <!-- Register the grid data source under the UI component name so the
+         framework's collection factory can spin it up. -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="panth_robots_seo_policy_listing_data_source"
+                      xsi:type="string">Panth\RobotsSeo\Model\ResourceModel\RobotsPolicy\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Panth\RobotsSeo\Ui\PolicyGridFulltextFilter" type="Panth\RobotsSeo\Ui\Component\Listing\LikeFulltextFilter">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="user_agent" xsi:type="string">main_table.user_agent</item>
+                <item name="directive" xsi:type="string">main_table.directive</item>
+                <item name="path" xsi:type="string">main_table.path</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Panth\RobotsSeo\Ui\PolicyGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Panth\RobotsSeo\Ui\PolicyGridFulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Panth\RobotsSeo\Ui\PolicyGridReporting" type="Magento\Framework\View\Element\UiComponent\DataProvider\Reporting">
+        <arguments>
+            <argument name="filterPool" xsi:type="object">Panth\RobotsSeo\Ui\PolicyGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Panth\RobotsSeo\Ui\PolicyGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="reporting" xsi:type="object">Panth\RobotsSeo\Ui\PolicyGridReporting</argument>
+        </arguments>
+    </virtualType>
+</config>
