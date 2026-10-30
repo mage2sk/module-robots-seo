@@ -205,7 +205,7 @@ Keep `Panth_Core` if other Panth extensions are installed. The module ships no u
 
 ## License
 
-Proprietary, as declared in `composer.json`. The package is published on Packagist and can be installed with Composer; see the product page for the terms of use.
+Free and open source under the MIT License. See [LICENSE.txt](LICENSE.txt).
 
 ## Changelog
 
